@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.preference.PreferenceManager;
 import android.view.MotionEvent;
@@ -15,12 +13,12 @@ import android.view.SurfaceView;
 
 import java.util.ArrayList;
 
-public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
+public class KasernenPanel extends SurfaceView implements SurfaceHolder.Callback {
     public static final int WIDTH = 856;
     public static final int HEIGHT = 480;
     public static final int MOVESPEED = -5;
 
-    private MainThread thread;
+    private MainThread thread = new MainThread(getHolder(),  KasernenPanel ,this);
     private Background bg;
 
     public double touchX = 100;
@@ -31,14 +29,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap rndl;
     private Bitmap healer;
 
-
     private ArrayList<Handpositions> handpositionsPlayer = new ArrayList<Handpositions>();
     private ArrayList<Handpositions> handpositionsOpponent = new ArrayList<Handpositions>();
 
 
 
 
-    public GamePanel(Context context) {
+    public KasernenPanel(Context context) {
         super(context);
 
 
@@ -105,7 +102,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
 
-        thread = new MainThread(getHolder(), this);
+        thread = new MainThread(getHolder(),  KasernenPanel ,this);
         thread.setRunning(true);
         thread.start();
 
