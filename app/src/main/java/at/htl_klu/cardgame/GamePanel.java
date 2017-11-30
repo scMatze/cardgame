@@ -31,6 +31,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap rndl;
     private Bitmap healer;
     private Bitmap playerHero;
+    private boolean kaserne = false;
 
 
     private ArrayList<Handpositions> handpositionsPlayer = new ArrayList<Handpositions>();
@@ -126,6 +127,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         //super.onTouchEvent(event);
         touchX = event.getX();
         touchY = event.getY();
+
+        if(touchX > 0 && touchX < getWidth()/12 && touchY > getHeight()/3 && touchY < getHeight()/3*2){
+            kaserne = true;
+
+
+        }
 
 
 
