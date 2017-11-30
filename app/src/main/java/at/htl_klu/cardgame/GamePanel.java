@@ -30,10 +30,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private Bitmap rndl;
     private Bitmap healer;
+    private Bitmap playerHero;
 
 
     private ArrayList<Handpositions> handpositionsPlayer = new ArrayList<Handpositions>();
     private ArrayList<Handpositions> handpositionsOpponent = new ArrayList<Handpositions>();
+    private ArrayList<Handpositions> heroPosition = new ArrayList<>();
 
 
 
@@ -91,6 +93,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         }
 
+      //  heroPosition.add(new Handpositions(getWidth() / 70 + getWidth()/12*7 + getWidth()/60*7 , getHeight() - 1 - (getHeight() / 4), getWidth() / 10, getHeight() / 4));
+      //  heroPosition.add(new Handpositions(getWidth() / 70 + getWidth()/12*7 + getWidth()/60*7 , -1, getWidth() / 10, getHeight() / 4));
+        heroPosition.add(new Handpositions(-1 ,-1, getWidth()-1, getHeight() / 4));
+        heroPosition.add(new Handpositions(-1 ,getHeight()-1-getHeight() / 4, getWidth()-1, getHeight() / 4));
+
+
 
         bg = new Background(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg2), getWidth() - 1, getHeight() - 1, false));
 
@@ -99,6 +107,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         healer = BitmapFactory.decodeResource(getResources(), R.drawable.healer);
 
+        playerHero = BitmapFactory.decodeResource(getResources(), R.drawable.testherowall);
 
 
 
@@ -117,6 +126,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         //super.onTouchEvent(event);
         touchX = event.getX();
         touchY = event.getY();
+
+
 
         //return super.onTouchEvent(event);
         return true;
@@ -149,8 +160,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawBitmap(healer,getWidth()/70 + getWidth()/12*6 + getWidth()/60*6, getHeight()-1-(getHeight()/5), null);
 
 */
+        canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(0).getLength(), heroPosition.get(0).getVast(),false),heroPosition.get(0).getPositionX(),heroPosition.get(0).getPositionY(), null);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(1).getLength(), heroPosition.get(1).getVast(),false),heroPosition.get(1).getPositionX(),heroPosition.get(1).getPositionY(), null);
+
         canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsPlayer.get(4).getLength(), handpositionsPlayer.get(4).getVast(),false),handpositionsPlayer.get(4).getPositionX(),handpositionsPlayer.get(4).getPositionY(), null);
         canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsOpponent.get(4).getLength(), handpositionsOpponent.get(4).getVast(),false),handpositionsOpponent.get(4).getPositionX(),handpositionsOpponent.get(4).getPositionY(), null);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsPlayer.get(6).getLength(), handpositionsPlayer.get(6).getVast(),false),handpositionsPlayer.get(6).getPositionX(),handpositionsPlayer.get(6).getPositionY(), null);
+      //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(0).getLength(), heroPosition.get(0).getVast(),false),heroPosition.get(0).getPositionX(),heroPosition.get(0).getPositionY(), null);
+      //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(1).getLength(), heroPosition.get(1).getVast(),false),heroPosition.get(1).getPositionX(),heroPosition.get(1).getPositionY(), null);
 
     }
 
