@@ -31,7 +31,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap rndl;
     private Bitmap healer;
     private Bitmap playerHero;
-    private boolean kaserne = false;
+    private boolean kaserne = true;
 
 
     private ArrayList<Handpositions> handpositionsPlayer = new ArrayList<Handpositions>();
