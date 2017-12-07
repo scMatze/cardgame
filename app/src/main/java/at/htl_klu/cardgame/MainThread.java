@@ -12,6 +12,7 @@ public class MainThread extends Thread {
     private double averageFPS;
     private final SurfaceHolder surfaceHolder;
     private GamePanel gamePanel;
+
     private boolean running;
     public static Canvas canvas;
 
@@ -19,6 +20,7 @@ public class MainThread extends Thread {
         super();
         this.surfaceHolder = surfaceHolder;
         this.gamePanel = gamePanel;
+
 
     }
 

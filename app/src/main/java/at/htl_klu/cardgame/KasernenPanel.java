@@ -18,7 +18,7 @@ public class KasernenPanel extends SurfaceView implements SurfaceHolder.Callback
     public static final int HEIGHT = 480;
     public static final int MOVESPEED = -5;
 
-    private MainThread thread = new MainThread(getHolder(),  KasernenPanel ,this);
+    private MainThread thread;
     private Background bg;
 
     public double touchX = 100;
@@ -102,7 +102,7 @@ public class KasernenPanel extends SurfaceView implements SurfaceHolder.Callback
 
 
 
-        thread = new MainThread(getHolder(),  KasernenPanel ,this);
+        thread = new MainThread(getHolder(),  KasernenPanel, this);
         thread.setRunning(true);
         thread.start();
 
