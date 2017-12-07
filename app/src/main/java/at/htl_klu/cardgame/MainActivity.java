@@ -23,9 +23,4 @@ public class MainActivity extends Activity {
     protected void onStop()  {
         super.onStop();
     }
-
-
-
-
-
 }
