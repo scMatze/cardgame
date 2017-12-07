@@ -22,6 +22,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private MainThread thread;
     private Background bg;
+    private Background bg2;
 
     public double touchX = 1;
     public double touchY = 1;
@@ -31,15 +32,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap rndl;
     private Bitmap healer;
     private Bitmap playerHero;
-    public boolean kaserne = false;
-    private Paint paint = new Paint();
+    boolean kaserne = false;
 
 
     private ArrayList<Handpositions> handpositionsPlayer = new ArrayList<Handpositions>();
     private ArrayList<Handpositions> handpositionsOpponent = new ArrayList<Handpositions>();
     private ArrayList<Handpositions> heroPosition = new ArrayList<>();
-
-
 
 
     public GamePanel(Context context) {
@@ -52,7 +50,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         //make gamePanel focusable so it can handle events
         setFocusable(true);
-
 
 
     }
@@ -88,39 +85,31 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
         kaserne = false;
-        for(int i = 0; i <= 6; i++){
+        for (int i = 0; i <= 6; i++) {
 
 
-            handpositionsPlayer.add(new Handpositions(getWidth() / 70 + getWidth()/12*i + getWidth()/60*i, getHeight() - 1 - (getHeight() / 5), getWidth() / 12, getHeight() / 5));
+            handpositionsPlayer.add(new Handpositions(getWidth() / 70 + getWidth() / 12 * i + getWidth() / 60 * i, getHeight() - 1 - (getHeight() / 5), getWidth() / 12, getHeight() / 5));
 
-            handpositionsOpponent.add(new Handpositions(getWidth() / 70 + getWidth()/12*i + getWidth()/60*i,0, getWidth() / 12, getHeight() / 5));
+            handpositionsOpponent.add(new Handpositions(getWidth() / 70 + getWidth() / 12 * i + getWidth() / 60 * i, 0, getWidth() / 12, getHeight() / 5));
 
 
         }
 
-      //  heroPosition.add(new Handpositions(getWidth() / 70 + getWidth()/12*7 + getWidth()/60*7 , getHeight() - 1 - (getHeight() / 4), getWidth() / 10, getHeight() / 4));
-      //  heroPosition.add(new Handpositions(getWidth() / 70 + getWidth()/12*7 + getWidth()/60*7 , -1, getWidth() / 10, getHeight() / 4));
-        heroPosition.add(new Handpositions(-1 ,-1, getWidth()-1, getHeight() / 4));
-        heroPosition.add(new Handpositions(-1 ,getHeight()-1-getHeight() / 4, getWidth()-1, getHeight() / 4));
-
+        //  heroPosition.add(new Handpositions(getWidth() / 70 + getWidth()/12*7 + getWidth()/60*7 , getHeight() - 1 - (getHeight() / 4), getWidth() / 10, getHeight() / 4));
+        //  heroPosition.add(new Handpositions(getWidth() / 70 + getWidth()/12*7 + getWidth()/60*7 , -1, getWidth() / 10, getHeight() / 4));
+        heroPosition.add(new Handpositions(-1, -1, getWidth() - 1, getHeight() / 4));
+        heroPosition.add(new Handpositions(-1, getHeight() - 1 - getHeight() / 4, getWidth() - 1, getHeight() / 4));
 
 
         bg = new Background(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg2), getWidth() - 1, getHeight() - 1, false));
+        bg2 = new Background(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.healer), getWidth() - 1, getHeight() - 1, false));
 
-        rndl = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.peta), 200,200, false);
-       // healer = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.healer), getWidth()/12, getHeight()/5, false);
+        rndl = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.peta), 200, 200, false);
+        // healer = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.healer), getWidth()/12, getHeight()/5, false);
 
         healer = BitmapFactory.decodeResource(getResources(), R.drawable.healer);
 
         playerHero = BitmapFactory.decodeResource(getResources(), R.drawable.testherowall);
-
-        paint.setColor(Color.WHITE);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setTextSize(40);
-
-
-
-
 
 
         thread = new MainThread(getHolder(), this);
@@ -136,17 +125,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         touchX = event.getX();
         touchY = event.getY();
 
-        if(touchX > 1 && touchX < getWidth()/12 && touchY > getHeight()/3 && touchY < getHeight()/3*2){
+        if (touchX > 1 && touchX < getWidth() / 12 && touchY > getHeight() / 3 && touchY < getHeight() / 3 * 2) {
             kaserne = true;
-          // zwischen 1 und 156/ zwischen 357 und 714
+
 
         }
-        if(touchX > getWidth()/8*7 && touchX < getWidth()-1 && touchY < getHeight()/8 && touchY > 1){
+        if (touchX > getWidth() / 8 * 7 && touchX < getWidth() - 1 && touchY < getHeight() / 8 && touchY > 1) {
             kaserne = false;
 
 
         }
-
 
 
         //return super.onTouchEvent(event);
@@ -155,6 +143,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update() {
         bg.update();
+        bg2.update();
     }
 
     public boolean collision(GameObject a, GameObject b) {
@@ -167,11 +156,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
 
 
-
-
-    bg.draw(canvas);
-
-        if(kaserne == false) {
+        bg.draw(canvas);
 
      /*   canvas.drawBitmap(rndl, handpositions.get(0).getPositionX(), 200, null);
         canvas.drawBitmap(healer,getWidth()/70, getHeight()-1-(getHeight()/5), null);
@@ -183,24 +168,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawBitmap(healer,getWidth()/70 + getWidth()/12*6 + getWidth()/60*6, getHeight()-1-(getHeight()/5), null);
 
 */
-    canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(0).getLength(), heroPosition.get(0).getVast(), false), heroPosition.get(0).getPositionX(), heroPosition.get(0).getPositionY(), null);
-    canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(1).getLength(), heroPosition.get(1).getVast(), false), heroPosition.get(1).getPositionX(), heroPosition.get(1).getPositionY(), null);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(0).getLength(), heroPosition.get(0).getVast(), false), heroPosition.get(0).getPositionX(), heroPosition.get(0).getPositionY(), null);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(1).getLength(), heroPosition.get(1).getVast(), false), heroPosition.get(1).getPositionX(), heroPosition.get(1).getPositionY(), null);
 
-    canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsPlayer.get(4).getLength(), handpositionsPlayer.get(4).getVast(), false), handpositionsPlayer.get(4).getPositionX(), handpositionsPlayer.get(4).getPositionY(), null);
-    canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsOpponent.get(4).getLength(), handpositionsOpponent.get(4).getVast(), false), handpositionsOpponent.get(4).getPositionX(), handpositionsOpponent.get(4).getPositionY(), null);
-    canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsPlayer.get(6).getLength(), handpositionsPlayer.get(6).getVast(), false), handpositionsPlayer.get(6).getPositionX(), handpositionsPlayer.get(6).getPositionY(), null);
-    //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(0).getLength(), heroPosition.get(0).getVast(),false),heroPosition.get(0).getPositionX(),heroPosition.get(0).getPositionY(), null);
-    //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(1).getLength(), heroPosition.get(1).getVast(),false),heroPosition.get(1).getPositionX(),heroPosition.get(1).getPositionY(), null);
-}
+<<<<<<< HEAD
+        canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsPlayer.get(4).getLength(), handpositionsPlayer.get(4).getVast(), false), handpositionsPlayer.get(4).getPositionX(), handpositionsPlayer.get(4).getPositionY(), null);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsOpponent.get(4).getLength(), handpositionsOpponent.get(4).getVast(), false), handpositionsOpponent.get(4).getPositionX(), handpositionsOpponent.get(4).getPositionY(), null);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsPlayer.get(6).getLength(), handpositionsPlayer.get(6).getVast(), false), handpositionsPlayer.get(6).getPositionX(), handpositionsPlayer.get(6).getPositionY(), null);
+        //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(0).getLength(), heroPosition.get(0).getVast(),false),heroPosition.get(0).getPositionX(),heroPosition.get(0).getPositionY(), null);
+        //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(1).getLength(), heroPosition.get(1).getVast(),false),heroPosition.get(1).getPositionX(),heroPosition.get(1).getPositionY(), null);
 
+=======
 if(kaserne == true){
 //werner
     // peta
 }
+>>>>>>> 3f81c75cd096494881f4a62ae2cb0aa9b1213bd3
 
-canvas.drawText(""+ touchX,getWidth()/2, getHeight()/2, paint);
-        canvas.drawText(""+ touchY,getWidth()/2, getHeight()/2 + 50, paint);
+        if (kaserne == true) {
+            bg2.draw(canvas);
+        }
 
+        if (kaserne ==false) {
+            bg.draw(canvas);
+        }
     }
 
     public void saveInt(String key, int val) {
