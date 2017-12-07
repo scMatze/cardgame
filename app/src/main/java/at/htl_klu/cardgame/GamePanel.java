@@ -31,7 +31,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap rndl;
     private Bitmap healer;
     private Bitmap playerHero;
-     boolean kaserne;
+    public boolean kaserne = false;
+    private Paint paint = new Paint();
 
 
     private ArrayList<Handpositions> handpositionsPlayer = new ArrayList<Handpositions>();
@@ -113,6 +114,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         playerHero = BitmapFactory.decodeResource(getResources(), R.drawable.testherowall);
 
+        paint.setColor(Color.WHITE);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setTextSize(40);
+
 
 
 
@@ -133,7 +138,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         if(touchX > 1 && touchX < getWidth()/12 && touchY > getHeight()/3 && touchY < getHeight()/3*2){
             kaserne = true;
-
+          // zwischen 1 und 156/ zwischen 357 und 714
 
         }
         if(touchX > getWidth()/8*7 && touchX < getWidth()-1 && touchY < getHeight()/8 && touchY > 1){
@@ -162,8 +167,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
 
 
- if(kaserne = false) {
+
+
     bg.draw(canvas);
+
+        if(kaserne == false) {
 
      /*   canvas.drawBitmap(rndl, handpositions.get(0).getPositionX(), 200, null);
         canvas.drawBitmap(healer,getWidth()/70, getHeight()-1-(getHeight()/5), null);
@@ -185,9 +193,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(1).getLength(), heroPosition.get(1).getVast(),false),heroPosition.get(1).getPositionX(),heroPosition.get(1).getPositionY(), null);
 }
 
-if(kaserne = true){
-    bg.draw(canvas);
+if(kaserne == true){
+
 }
+
+canvas.drawText(""+ touchX,getWidth()/2, getHeight()/2, paint);
+        canvas.drawText(""+ touchY,getWidth()/2, getHeight()/2 + 50, paint);
+
     }
 
     public void saveInt(String key, int val) {
