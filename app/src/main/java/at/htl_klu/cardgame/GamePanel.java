@@ -194,7 +194,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 }
 
 if(kaserne == true){
-
+//werner
 }
 
 canvas.drawText(""+ touchX,getWidth()/2, getHeight()/2, paint);
