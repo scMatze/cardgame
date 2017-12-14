@@ -31,6 +31,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private Bitmap rndl;
     private Bitmap healer;
+    private Bitmap heretic;
+    private Bitmap attacker;
     private Bitmap playerHero;
     private Bitmap kasernebg;
     boolean kaserne = false;
@@ -39,6 +41,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private ArrayList<Handpositions> handpositionsPlayer = new ArrayList<Handpositions>();
     private ArrayList<Handpositions> handpositionsOpponent = new ArrayList<Handpositions>();
     private ArrayList<Handpositions> heroPosition = new ArrayList<>();
+
+    private ArrayList<Barracks> barrackCardPosition = new ArrayList<Barracks>();
+
 
 
     public GamePanel(Context context) {
@@ -101,6 +106,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         heroPosition.add(new Handpositions(-1, -1, getWidth() - 1, getHeight() / 4));
         heroPosition.add(new Handpositions(-1, getHeight() - 1 - getHeight() / 4, getWidth() - 1, getHeight() / 4));
 
+        for(int i= 0; i<=6; i++) {
+            barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight()/3, getWidth() / 12, getHeight() / 5));
+        }
+
+
+
 
         bg = new Background(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg2), getWidth() - 1, getHeight() - 1, false));
         //bg2 = new Background(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.healer), getWidth() - 1, getHeight() - 1, false));2 = new Background(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.healer), getWidth() - 1, getHeight() - 1, false));
@@ -110,6 +121,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         // healer = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.healer), getWidth()/12, getHeight()/5, false);
 
         healer = BitmapFactory.decodeResource(getResources(), R.drawable.healer);
+        attacker = BitmapFactory.decodeResource(getResources(), R.drawable.attacker);
+        heretic = BitmapFactory.decodeResource(getResources(), R.drawable.heretiker);
 
         playerHero = BitmapFactory.decodeResource(getResources(), R.drawable.testherowall);
 
@@ -186,9 +199,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
 
 if(kaserne == true){
-//werner
-    // peta
+
     canvas.drawBitmap(kasernebg, 0,0, null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(0).getLength(),barrackCardPosition.get(0).getVast(), false),barrackCardPosition.get(0).getPositionX(),barrackCardPosition.get(0).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(attacker, barrackCardPosition.get(1).getLength(),barrackCardPosition.get(1).getVast(), false),barrackCardPosition.get(1).getPositionX(),barrackCardPosition.get(1).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(heretic, barrackCardPosition.get(2).getLength(),barrackCardPosition.get(2).getVast(), false),barrackCardPosition.get(2).getPositionX(),barrackCardPosition.get(2).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(3).getLength(),barrackCardPosition.get(3).getVast(), false),barrackCardPosition.get(3).getPositionX(),barrackCardPosition.get(3).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(4).getLength(),barrackCardPosition.get(4).getVast(), false),barrackCardPosition.get(4).getPositionX(),barrackCardPosition.get(3).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(5).getLength(),barrackCardPosition.get(5).getVast(), false),barrackCardPosition.get(5).getPositionX(),barrackCardPosition.get(5).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(6).getLength(),barrackCardPosition.get(6).getVast(), false),barrackCardPosition.get(6).getPositionX(),barrackCardPosition.get(6).getPositionY(),null);
+
 }
 
 
