@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.preference.PreferenceManager;
 import android.view.MotionEvent;
@@ -35,6 +33,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap attacker;
     private Bitmap playerHero;
     private Bitmap kasernebg;
+    private Bitmap exitBarracks;
+    private Bitmap barracks;
     boolean kaserne = false;
 
 
@@ -123,6 +123,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         healer = BitmapFactory.decodeResource(getResources(), R.drawable.healer);
         attacker = BitmapFactory.decodeResource(getResources(), R.drawable.attacker);
         heretic = BitmapFactory.decodeResource(getResources(), R.drawable.heretiker);
+        exitBarracks = BitmapFactory.decodeResource(getResources(), R.drawable.exitbutton);
+        barracks = BitmapFactory.decodeResource(getResources(),R.drawable.barracks);
 
         playerHero = BitmapFactory.decodeResource(getResources(), R.drawable.testherowall);
 
@@ -196,6 +198,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsPlayer.get(6).getLength(), handpositionsPlayer.get(6).getVast(), false), handpositionsPlayer.get(6).getPositionX(), handpositionsPlayer.get(6).getPositionY(), null);
             //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(0).getLength(), heroPosition.get(0).getVast(),false),heroPosition.get(0).getPositionX(),heroPosition.get(0).getPositionY(), null);
             //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(1).getLength(), heroPosition.get(1).getVast(),false),heroPosition.get(1).getPositionX(),heroPosition.get(1).getPositionY(), null);
+            canvas.drawBitmap(Bitmap.createScaledBitmap(barracks,getWidth()/6,getHeight()/2,false),getWidth()/100, getHeight()/4,null);
         }
 
 if(kaserne == true){
@@ -208,6 +211,8 @@ if(kaserne == true){
     canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(4).getLength(),barrackCardPosition.get(4).getVast(), false),barrackCardPosition.get(4).getPositionX(),barrackCardPosition.get(3).getPositionY(),null);
     canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(5).getLength(),barrackCardPosition.get(5).getVast(), false),barrackCardPosition.get(5).getPositionX(),barrackCardPosition.get(5).getPositionY(),null);
     canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(6).getLength(),barrackCardPosition.get(6).getVast(), false),barrackCardPosition.get(6).getPositionX(),barrackCardPosition.get(6).getPositionY(),null);
+    //  if (touchX > getWidth() / 8 * 7 && touchX < getWidth() - 1 && touchY < getHeight() / 8 && touchY > 1) {
+    canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks,getWidth()/8,getHeight()/6,false),getWidth()*7/8, getHeight()/35,null);
 
 }
 
