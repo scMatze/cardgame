@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.preference.PreferenceManager;
 import android.view.MotionEvent;
@@ -35,14 +37,32 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap kasernebg;
     private Bitmap exitBarracks;
     private Bitmap barracks;
+    private Bitmap plus;
+    private Bitmap minus;
+    private Bitmap priceBlank;
+    public Paint paint = new Paint();
+
     boolean kaserne = false;
 
 
     private ArrayList<Handpositions> handpositionsPlayer = new ArrayList<Handpositions>();
     private ArrayList<Handpositions> handpositionsOpponent = new ArrayList<Handpositions>();
     private ArrayList<Handpositions> heroPosition = new ArrayList<>();
+    private ArrayList<priceBlank> pricePositions = new ArrayList<>();
 
     private ArrayList<Barracks> barrackCardPosition = new ArrayList<Barracks>();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -106,8 +126,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         heroPosition.add(new Handpositions(-1, -1, getWidth() - 1, getHeight() / 4));
         heroPosition.add(new Handpositions(-1, getHeight() - 1 - getHeight() / 4, getWidth() - 1, getHeight() / 4));
 
+
         for(int i= 0; i<=6; i++) {
             barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight()/3, getWidth() / 12, getHeight() / 5));
+            pricePositions.add(new priceBlank(getWidth()/12+getWidth()/12*i+getWidth()/24*i,getHeight()*9/16,getWidth()/12,getHeight()/16));
+                    //priceBlank, getWidth() /12 , getHeight() *1/16, false), getWidth()/12, getHeight()*9/16, null
         }
 
 
@@ -125,6 +148,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         heretic = BitmapFactory.decodeResource(getResources(), R.drawable.heretiker);
         exitBarracks = BitmapFactory.decodeResource(getResources(), R.drawable.exitbutton);
         barracks = BitmapFactory.decodeResource(getResources(),R.drawable.barracks);
+        plus = BitmapFactory.decodeResource(getResources(),R.drawable.plus);
+        minus = BitmapFactory.decodeResource(getResources(),R.drawable.minus);
+        priceBlank = BitmapFactory.decodeResource(getResources(),R.drawable.priceblank);
 
         playerHero = BitmapFactory.decodeResource(getResources(), R.drawable.testherowall);
 
@@ -211,8 +237,22 @@ if(kaserne == true){
     canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(4).getLength(),barrackCardPosition.get(4).getVast(), false),barrackCardPosition.get(4).getPositionX(),barrackCardPosition.get(3).getPositionY(),null);
     canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(5).getLength(),barrackCardPosition.get(5).getVast(), false),barrackCardPosition.get(5).getPositionX(),barrackCardPosition.get(5).getPositionY(),null);
     canvas.drawBitmap(Bitmap.createScaledBitmap(healer, barrackCardPosition.get(6).getLength(),barrackCardPosition.get(6).getVast(), false),barrackCardPosition.get(6).getPositionX(),barrackCardPosition.get(6).getPositionY(),null);
+
+    canvas.drawBitmap(Bitmap.createScaledBitmap(priceBlank, pricePositions.get(0).getLength(),pricePositions.get(0).getVast(), false),pricePositions.get(0).getPositionX(),pricePositions.get(0).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(priceBlank, pricePositions.get(1).getLength(),pricePositions.get(1).getVast(), false),pricePositions.get(1).getPositionX(),pricePositions.get(1).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(priceBlank, pricePositions.get(2).getLength(),pricePositions.get(2).getVast(), false),pricePositions.get(2).getPositionX(),pricePositions.get(2).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(priceBlank, pricePositions.get(3).getLength(),pricePositions.get(3).getVast(), false),pricePositions.get(3).getPositionX(),pricePositions.get(3).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(priceBlank, pricePositions.get(4).getLength(),pricePositions.get(4).getVast(), false),pricePositions.get(4).getPositionX(),pricePositions.get(4).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(priceBlank, pricePositions.get(5).getLength(),pricePositions.get(5).getVast(), false),pricePositions.get(5).getPositionX(),pricePositions.get(5).getPositionY(),null);
+    canvas.drawBitmap(Bitmap.createScaledBitmap(priceBlank, pricePositions.get(6).getLength(),pricePositions.get(6).getVast(), false),pricePositions.get(6).getPositionX(),pricePositions.get(6).getPositionY(),null);
     //  if (touchX > getWidth() / 8 * 7 && touchX < getWidth() - 1 && touchY < getHeight() / 8 && touchY > 1) {
     canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks,getWidth()/8,getHeight()/6,false),getWidth()*7/8, getHeight()/35,null);
+    for(int i= 0; i<=6; i++) {
+        canvas.drawBitmap(Bitmap.createScaledBitmap(priceBlank, getWidth() /12 , getHeight() *1/16, false), getWidth()/12, getHeight()*9/16, null);
+
+        canvas.drawText("100 Gold",(getWidth() /12) , (getHeight() *1/16),paint);
+        //new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight()/3, getWidth() / 12, getHeight() / 5
+    }
 
 }
 
