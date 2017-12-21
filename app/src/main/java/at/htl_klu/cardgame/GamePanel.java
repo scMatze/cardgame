@@ -40,7 +40,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap plus;
     private Bitmap minus;
     private Bitmap priceBlank;
-    public Paint paint = new Paint();
+    public Paint paint;
 
     boolean kaserne = false;
 
@@ -153,6 +153,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         priceBlank = BitmapFactory.decodeResource(getResources(),R.drawable.priceblank);
 
         playerHero = BitmapFactory.decodeResource(getResources(), R.drawable.testherowall);
+
+        paint = new Paint();
+        paint.setColor(Color.BLACK);
 
 
         thread = new MainThread(getHolder(), this);
