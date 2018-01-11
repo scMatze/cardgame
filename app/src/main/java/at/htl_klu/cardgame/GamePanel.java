@@ -43,15 +43,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap plus;
     private Bitmap minus;
     private Bitmap priceBlank;
-<<<<<<< HEAD
-    public Paint paint;
-=======
+
+
+
     private Bitmap priceWanted;
     private Bitmap wanted;
     public Paint paint;
     public Paint paintShade;
 
->>>>>>> 86838b32d9e640f09801da6571a0b5783b603dd2
+
 
     boolean kaserne = false;
 
