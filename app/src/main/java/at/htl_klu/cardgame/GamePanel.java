@@ -247,6 +247,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             ColorFilter filter = new LightingColorFilter(0xFF7F7F7F, 0x00000000);
             paintShade.setColorFilter(filter);
 
+        
+
 
             canvas.drawBitmap(kasernebg, 0, 0, null);
 
