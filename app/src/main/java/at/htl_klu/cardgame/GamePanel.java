@@ -6,10 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -34,6 +33,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private Bitmap rndl;
     private Bitmap healer;
+    private Bitmap healerBig;
     private Bitmap heretic;
     private Bitmap attacker;
     private Bitmap playerHero;
@@ -42,18 +42,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap barracks;
     private Bitmap plus;
     private Bitmap minus;
+    private Bitmap pieceBlank;
+    private Bitmap transparentBG;
     private Bitmap priceBlank;
-<<<<<<< HEAD
-    public Paint paint;
-=======
+
+
+
     private Bitmap priceWanted;
     private Bitmap wanted;
     public Paint paint;
-    public Paint paintShade;
+    public Shader shader;
 
->>>>>>> 86838b32d9e640f09801da6571a0b5783b603dd2
+
+
 
     boolean kaserne = false;
+    boolean extendCard = false;
 
     private CardOffers healers = new CardOffers("Healer", 100, 1);
     private CardOffers attackers = new CardOffers("Attacker", 100, 1);
@@ -156,16 +160,29 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         heretic = BitmapFactory.decodeResource(getResources(), R.drawable.heretiker);
         exitBarracks = BitmapFactory.decodeResource(getResources(), R.drawable.exitbutton);
         barracks = BitmapFactory.decodeResource(getResources(), R.drawable.barracks);
-        plus = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
-        minus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
-        priceBlank = BitmapFactory.decodeResource(getResources(), R.drawable.priceblank);
         wanted = BitmapFactory.decodeResource(getResources(), R.drawable.steckbrief);
         priceWanted = BitmapFactory.decodeResource(getResources(), R.drawable.pricewanted);
+        transparentBG = BitmapFactory.decodeResource(getResources(), R.drawable.transparent);
+        healerBig = BitmapFactory.decodeResource(getResources(), R.drawable.healer);
+        healerBig = Bitmap.createScaledBitmap(healer,getWidth() / 3, getHeight()*3/4,false);
+        pieceBlank = BitmapFactory.decodeResource(getResources(), R.drawable.pieceblank);
+        pieceBlank = Bitmap.createScaledBitmap(pieceBlank,getWidth()*4/16, getHeight()*2/16,false);
+        plus = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
+        plus = Bitmap.createScaledBitmap(plus,getWidth()*2/16,getHeight()*2/16,false);
+        minus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+        minus = Bitmap.createScaledBitmap(minus,getWidth()*2/16,getHeight()*2/16,false);
+        priceBlank = BitmapFactory.decodeResource(getResources(), R.drawable.priceblank);
+        priceBlank = Bitmap.createScaledBitmap(priceBlank,getWidth()*4/16, getHeight()*2/16,false);
+
+
 
         playerHero = BitmapFactory.decodeResource(getResources(), R.drawable.testherowall);
 
         paint = new Paint();
         paint.setColor(Color.BLACK);
+
+
+
 
 
         thread = new MainThread(getHolder(), this);
@@ -225,6 +242,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
 
+
+
      /*   canvas.drawBitmap(rndl, handpositions.get(0).getPositionX(), 200, null);
         canvas.drawBitmap(healer,getWidth()/70, getHeight()-1-(getHeight()/5), null);
         canvas.drawBitmap(healer,getWidth()/70 + getWidth()/12 + getWidth()/60, getHeight()-1-(getHeight()/5), null);
@@ -250,14 +269,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         if (kaserne == true) {
 
 
-            paintShade = new Paint();
-            ColorFilter filter = new LightingColorFilter(0xFF7F7F7F, 0x00000000);
-            paintShade.setColorFilter(filter);
+
+
 
         
 
 
             canvas.drawBitmap(kasernebg, 0, 0, null);
+
 
 
             canvas.drawBitmap(Bitmap.createScaledBitmap(wanted, wantedPosition.get(0).getLength(), wantedPosition.get(0).getVast(), false), wantedPosition.get(0).getPositionX(), wantedPosition.get(0).getPositionY(), null);
@@ -294,10 +313,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             //  if (touchX > getWidth() / 8 * 7 && touchX < getWidth() - 1 && touchY < getHeight() / 8 && touchY > 1) {
             canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() * 7 / 8, getHeight() / 35, null);
 
+
+
             paint = new Paint();
             paint.setColor(Color.BLACK);
             paint.setStyle(Paint.Style.FILL);
             paint.setTextSize(30);
+
 
 
             //new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight()/3, getWidth() / 12, getHeight() / 5
@@ -311,6 +333,26 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawText(String.valueOf(druids.getPrice()) + "Gold", (getWidth() / 11) + getWidth() * 4 / 8, (getHeight() * 20 / 32), paint);
             canvas.drawText(String.valueOf(pioneers.getPrice()) + "Gold", (getWidth() / 11) + getWidth() * 5 / 8, (getHeight() * 20 / 32), paint);
             canvas.drawText(String.valueOf(bannerCarriers.getPrice()) + "Gold", (getWidth() / 11) + getWidth() * 6 / 8, (getHeight() * 20 / 32), paint);
+
+            paint.setColor(Color.TRANSPARENT);
+            paint.setAlpha(200);
+
+
+
+
+            if(extendCard == true) {
+                canvas.drawBitmap(transparentBG, 0, 0, paint);
+
+                canvas.drawBitmap(healerBig, getWidth() * 4 / 12, getHeight() / 16, null);
+                canvas.drawBitmap(pieceBlank, getWidth() * 3 / 12, getHeight() * 15 / 18, null);
+                canvas.drawBitmap(plus, getWidth() * 2 / 16, getHeight() * 15 / 18, null);
+                canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+                canvas.drawBitmap(priceBlank, getWidth() * 10 / 16, getHeight() * 15 / 18, null);
+            }
+
+
+
+
 
 
 
