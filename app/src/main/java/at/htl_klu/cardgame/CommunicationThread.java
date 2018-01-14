@@ -70,6 +70,7 @@ public class CommunicationThread extends Thread  {
                 Log.d("Peta", "Trying to connect to " + ip + " on port " + port);
                 socket = new Socket(ip, port);
                 Log.d("Peta", "Connection established");
+                connected = true;
                 out = new DataOutputStream(socket.getOutputStream());
                 in = new DataInputStream(socket.getInputStream());
                 this.setConnected(true);
@@ -77,6 +78,7 @@ public class CommunicationThread extends Thread  {
                 serverSocket = new ServerSocket(port);
                 socket = serverSocket.accept();
                 Log.d("Peta", "Connection established");
+                connected = true;
                 out = new DataOutputStream(socket.getOutputStream());
                 in = new DataInputStream(socket.getInputStream());
                 this.setConnected(true);
