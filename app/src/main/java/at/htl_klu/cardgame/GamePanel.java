@@ -64,6 +64,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap kasernenscaledhealer;
     private Bitmap kasenenscaledattacker;
     private Bitmap kasernenscaledheretic;
+    private Bitmap endturnbutton;
+    private Bitmap enemyturnpicture;
     private boolean server;
     private boolean client;
     boolean part;
@@ -273,7 +275,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread.setRunning(true);
         thread.start();
 
-        ct = new CommunicationThread("192.168.1.100", 8888);
+        ct = new CommunicationThread("10.66.12.159", 8888);
 
 
     }
