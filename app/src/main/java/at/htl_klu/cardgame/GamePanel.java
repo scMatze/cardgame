@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -338,8 +339,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             paint.setColor(Color.TRANSPARENT);
             paint.setAlpha(200);
 
+          //  priceWantedPosition.add(new priceWanted(getWidth() / 16 + getWidth() / 12 * i + getWidth() / 22 * i, getHeight() * 9 / 16, getWidth() / 8, getHeight() / 4));
+            if (touchX > getWidth()/16 && touchX < getWidth()*3/16 && touchY < getHeight()/4 && touchY > getHeight()*13/16) {
+                Log.d("Koordinaten",""+touchX+touchY);
 
-
+            }
 
             if(extendCard == true) {
                 canvas.drawBitmap(transparentBG, 0, 0, paint);
