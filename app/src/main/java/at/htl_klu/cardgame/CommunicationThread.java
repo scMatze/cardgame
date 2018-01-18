@@ -5,6 +5,7 @@ import android.util.Log;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -20,18 +21,24 @@ public class CommunicationThread extends Thread  {
     private ServerSocket serverSocket;
     private DataOutputStream out;
     private DataInputStream in;
-    private String command;
+    private int command =0;
     private boolean connected = false;
+    private boolean playerhasturn = false;
+    private boolean enemyhasturn = false;
+    private int incomigData = 0;
+    private GamePanel gamepanel;
+    private boolean test = false;
 
-
-    public CommunicationThread(String ip, int port) {
+    public CommunicationThread(String ip, int port, GamePanel panel) {
         this.ip = ip;
         this.port = port;
        // this.part = part;
+        this.gamepanel = panel;
     }
 
-    public void setCommand(String command) {
+    public void setCommand(int command) {
         this.command = command;
+        this.test = true;
     }
     public void setPart(Boolean part) {
         this.part = part;
@@ -39,14 +46,59 @@ public class CommunicationThread extends Thread  {
 
     public void sendCommand() {
         try {
-            if (this.command.equals("0") ) {
-            //    out.write(this.command);
+            if(playerhasturn == true || test){
+                Log.d("werner","playerhasturn true");
+             if (this.command !=0 ) {
+                 Log.d("werner", "command not null true");
 
-                out.flush();
-             //   this.command = 0;
+                 if (this.command == 1) {
+
+                     Log.d("werner", "equals endturn true");
+
+                     //    out.write(this.command);
+                     //      if (this.command.equals("endturn")) {
+                     out.writeInt(this.command);
+                     out.flush();
+                     //   }
+
+                     this.command = 0;
+                     test = false;
+
+                 }
+             }
             }
+
+
+                Log.d("werner", "---------" + enemyhasturn);
+
+             //   if (enemyhasturn == true || !test){
+
+            while(enemyhasturn){
+                    Log.d("werner","noch bevor dem readUTF");
+
+                try {
+                    incomigData = in.read();
+                    Log.d("werner", "*********" + incomigData);
+
+                    if (incomigData == 1) {
+                        gamepanel.setPlayerhasturn(true);
+                        gamepanel.setEnemyhasturn((false));
+                        this. enemyhasturn = false;
+                        this.playerhasturn = true;
+                        incomigData = 0;
+                        Log.d("werner", "set new turn");
+                    }
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+
+
+            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
+            Log.d("werner", "catch triggert peta");
         }
     }
 
@@ -57,9 +109,16 @@ public class CommunicationThread extends Thread  {
         while (true) {
             try {
                 Thread.sleep(500);
-                //sendCommand();
+                sendCommand();
+           //     if(enemyhasturn == true) {
+             //       incomigData = in.readUTF();
+            //    }
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Log.d("werner", "triggered catchclause");
+           // } catch (IOException e) {
+          //      e.printStackTrace();
             }
         }
     }
@@ -87,6 +146,26 @@ public class CommunicationThread extends Thread  {
         } catch (IOException e) {
             Log.d("Peta", "Failed to connect");
         }
+    }
+
+    public boolean isPlayerhasturn() {
+        return playerhasturn;
+    }
+
+    public void setPlayerhasturn(boolean playerhasturn) {
+        this.playerhasturn = playerhasturn;
+    }
+
+    public boolean isEnemyhasturn() {
+        return enemyhasturn;
+    }
+
+    public void setEnemyhasturn(boolean enemyhasturn) {
+        this.enemyhasturn = enemyhasturn;
+    }
+
+    public int getIncomigData() {
+        return incomigData;
     }
 
     public boolean isConnected() {
