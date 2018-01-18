@@ -648,7 +648,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
                     //String healerPrice = String.valueOf(healers.getPrice());
-                    canvas.drawText(String.valueOf(healers.getPrice()) + "Gold", (getWidth() / 11), (getHeight() * 20 / 32), paint);
+                    canvas.drawText(String.valueOf(healers.getPrice()) + "Gold", (getWidth() / 12), (getHeight() * 20 / 32), paint);
                     canvas.drawText(String.valueOf(attackers.getPrice()) + "Gold", (getWidth() / 11) + getWidth() / 8, (getHeight() * 20 / 32), paint);
                     canvas.drawText(String.valueOf(heretics.getPrice()) + "Gold", (getWidth() / 11) + getWidth() * 2 / 8, (getHeight() * 20 / 32), paint);
                     canvas.drawText(String.valueOf(ghosts.getPrice()) + "Gold", (getWidth() / 11) + getWidth() * 3 / 8, (getHeight() * 20 / 32), paint);
