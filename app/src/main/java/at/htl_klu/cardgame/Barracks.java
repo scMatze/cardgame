@@ -42,7 +42,7 @@ public class Barracks {
         this.length = length;
     }
 
-    public int getVast() {
+    public  int getVast() {
         return vast;
     }
 

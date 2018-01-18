@@ -21,6 +21,8 @@ import android.view.SurfaceView;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static at.htl_klu.cardgame.MainThread.canvas;
+
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public static final int WIDTH = 856;
     public static final int HEIGHT = 480;
@@ -86,10 +88,21 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private int playermoneycounter = 5;
     private int enemymoneycounter = 5;
     private int deckremovecounter = 19;
+<<<<<<< HEAD
     private boolean drawLargeAssasine = false;
     private boolean drawplaybutton = false;
     private boolean drawclosebutton = false;
     private int opponenthandcounter = 7;
+=======
+    private boolean touch = false;
+    private boolean touch1 = false;
+    private boolean touch2 = false;
+    private boolean touch3 = false;
+    private boolean touch4 = false;
+    private boolean touch5 = false;
+    private boolean touch6 = false;
+
+>>>>>>> 18f38e2e198ced5696353d7cb7182a6fbaac822e
 
 
 
@@ -195,6 +208,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
 
 
+
+
+
         bg = new Background(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg2), getWidth() - 1, getHeight() - 1, false));
         //bg2 = new Background(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.healer), getWidth() - 1, getHeight() - 1, false));2 = new Background(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.healer), getWidth() - 1, getHeight() - 1, false));
         kasernebg = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.kasernebg), getWidth() - 1, getHeight() - 1, false);
@@ -290,7 +306,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread.setRunning(true);
         thread.start();
 
-        ct = new CommunicationThread("10.66.12.159", 8888, this);
+
+        ct = new CommunicationThread("10.66.11.18", 8888,this);
+
+
+
 
 
     }
@@ -344,31 +364,33 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         }
 
+
       //  if(connected = true && kaserne == false && playerhasturn == true)
 
-            if (connected == true && healerScale == false &&touchX > 1 && touchX < getWidth() / 12 && touchY < getHeight() / 2 && touchY > getHeight() / 4
-                    ) {
+
+            //if (healerScale == false &&touchX > 1 && touchX < getWidth() / 12 && touchY < getHeight() / 2 && touchY > getHeight() / 4) {
+
+            if (connected == true && healerScale == false &&touchX > 1 && touchX < getWidth() / 12 && touchY < getHeight() / 2 && touchY > getHeight() / 4) {
+
                 //barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
                 //handpositionsPlayer.add(new Handpositions(getWidth() / 70 + getWidth() / 12 * i + getWidth() / 60 * i, getHeight() - 1 - (getHeight() / 5), getWidth() / 12, getHeight() / 5));
-                healerScale = true;
+                //healerScale = true;
 
 
-        }
+                // }
 
-        if(connected == true && playerhasturn == true && touchX < getWidth() && touchX > getWidth()/20*19 && touchY < getHeight()/9*5
-                && touchY > getHeight()/9*4){
-
-
-           // ct.sendCommand("endturn");
-            ct.setCommand(1);
-            enemyhasturn = true;
-            playerhasturn = false;
-            ct.setEnemyhasturn(enemyhasturn);
-                ct.setPlayerhasturn(playerhasturn);
+                if (connected == true && playerhasturn == true && touchX < getWidth() && touchX > getWidth() / 20 * 19 && touchY < getHeight() / 9 * 5
+                        && touchY > getHeight() / 9 * 4) {
 
 
+                    // ct.sendCommand("endturn");
+                    ct.setCommand(1);
+                    enemyhasturn = true;
+                    playerhasturn = false;
+                    ct.setEnemyhasturn(enemyhasturn);
+                    ct.setPlayerhasturn(playerhasturn);
 
-
+<<<<<<< HEAD
         }
         if(connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(0).getPositionX() &&
                 touchX < handpositionsPlayer.get(0).getPositionX()+handpositionsPlayer.get(0).getLength() &&
@@ -394,6 +416,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             drawclosebutton = false;
             drawplaybutton = false;
         }
+=======
+
+                }
+            }
+>>>>>>> 18f38e2e198ced5696353d7cb7182a6fbaac822e
         //return super.onTouchEvent(event);
         return true;
     }
@@ -520,6 +547,53 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
                 if (kaserne == true) {
 
+                    if (touchX > getWidth() / 12 && touchX < getWidth() / 12 + barrackCardPosition.get(0).getLength() && touchY > getHeight() / 3 && touchY < getHeight()/3+ barrackCardPosition.get(0).getVast()) {
+                        // barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
+                        touch = true;
+                        Log.d("Koordinaten", "touchX" + "touchY");
+                        // Log.d("touch", "touchevent");
+
+
+
+                    }
+
+                    if (touchX > getWidth() / 6 && touchX < getWidth() / 6 + barrackCardPosition.get(1).getLength() && touchY > getHeight() / 3 && touchY < getHeight()/3+ barrackCardPosition.get(1).getVast()) {
+                        //barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
+                        touch1= true;
+                    }
+
+                    if (touchX > getWidth() / 3 && touchX < getWidth() / 3 + barrackCardPosition.get(2).getLength() && touchY > getHeight() / 3 && touchY < getHeight()/3+ barrackCardPosition.get(2).getVast()) {
+
+                        //barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
+                        touch2= true;
+                    }
+                    if (touchX > getWidth() / 2 && touchX < getWidth() / 2 + barrackCardPosition.get(3).getLength() && touchY > getHeight() / 3 && touchY < getHeight()/3+ barrackCardPosition.get(3).getVast()) {
+
+                        //barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
+                        touch3= true;
+                    }
+
+                    if (touchX > getWidth()*7/12 && touchX < getWidth()*7/12 + barrackCardPosition.get(4).getLength() && touchY > getHeight() / 3 && touchY < getHeight()/3+ barrackCardPosition.get(4).getVast()) {
+
+                        //barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
+                        touch4= true;
+                    }
+
+                    if (touchX > getWidth()*3/4 && touchX < getWidth()*3/4 + barrackCardPosition.get(5).getLength() && touchY > getHeight() / 3 && touchY < getHeight()/3+ barrackCardPosition.get(5).getVast()) {
+
+                        //barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
+                        touch5= true;
+                    }
+
+                    if (touchX > getWidth()*5/6&& touchX < getWidth()*5/6 + barrackCardPosition.get(6).getLength() && touchY > getHeight() / 3 && touchY < getHeight()/3+ barrackCardPosition.get(6).getVast()) {
+
+                        //barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
+                        touch6= true;
+                    }
+
+
+
+
 
                     paintShade = new Paint();
                     ColorFilter filter = new LightingColorFilter(0xFF7F7F7F, 0x00000000);
@@ -626,10 +700,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
           //  priceWantedPosition.add(new priceWanted(getWidth() / 16 + getWidth() / 12 * i + getWidth() / 22 * i, getHeight() * 9 / 16, getWidth() / 8, getHeight() / 4));
-            if (touchX > getWidth()/16 && touchX < getWidth()*3/16 && touchY < getHeight()/4 && touchY > getHeight()*13/16) {
-                Log.d("Koordinaten",""+touchX+touchY);
 
-            }
 
                     //new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight()/3, getWidth() / 12, getHeight() / 5
 
@@ -648,6 +719,124 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     paint.setAlpha(200);
 
 
+                    if (touch == true){
+                        canvas.drawBitmap(transparentBG, 0, 0, paint);
+
+                        canvas.drawBitmap(healerBig, getWidth() * 4 / 12, getHeight() / 16, null);
+                        canvas.drawBitmap(pieceBlank, getWidth() * 3 / 12, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(plus, getWidth() * 2 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(priceBlank, getWidth() * 10 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() /16, getHeight() / 35, null);
+
+                        if (connected == true && touchX > getWidth() /16 && touchX < getWidth()/16 + getWidth()/8 && touchY < getHeight() / 8 && touchY > 1) {
+                            touch = false;
+
+
+                        }
+
+                    }
+                    if (touch1 == true){
+                        canvas.drawBitmap(transparentBG, 0, 0, paint);
+
+                        canvas.drawBitmap(healerBig, getWidth() * 4 / 12, getHeight() / 16, null);
+                        canvas.drawBitmap(pieceBlank, getWidth() * 3 / 12, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(plus, getWidth() * 2 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(priceBlank, getWidth() * 10 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() * 7 / 8, getHeight() / 35, null);
+                        canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() /16, getHeight() / 35, null);
+                        if (connected == true && touchX > getWidth() /16 && touchX < getWidth()/16 + getWidth()/8 && touchY < getHeight() / 8 && touchY > 1) {
+                            touch1 = false;
+
+
+                        }
+
+                    }
+                    if (touch2 == true){
+                        canvas.drawBitmap(transparentBG, 0, 0, paint);
+
+                        canvas.drawBitmap(healerBig, getWidth() * 4 / 12, getHeight() / 16, null);
+                        canvas.drawBitmap(pieceBlank, getWidth() * 3 / 12, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(plus, getWidth() * 2 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(priceBlank, getWidth() * 10 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() /16, getHeight() / 35, null);
+                        if (connected == true && touchX > getWidth() /16 && touchX < getWidth()/16 + getWidth()/8 && touchY < getHeight() / 8 && touchY > 1) {
+                            touch2 = false;
+
+
+                        }
+
+                    }
+                    if (touch3 == true){
+                        canvas.drawBitmap(transparentBG, 0, 0, paint);
+
+                        canvas.drawBitmap(healerBig, getWidth() * 4 / 12, getHeight() / 16, null);
+                        canvas.drawBitmap(pieceBlank, getWidth() * 3 / 12, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(plus, getWidth() * 2 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(priceBlank, getWidth() * 10 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() /16, getHeight() / 35, null);
+                        if (connected == true && touchX > getWidth() /16 && touchX < getWidth()/16 + getWidth()/8 && touchY < getHeight() / 8 && touchY > 1) {
+                            touch3 = false;
+
+
+                        }
+
+                    }
+                    if (touch4 == true){
+                        canvas.drawBitmap(transparentBG, 0, 0, paint);
+
+                        canvas.drawBitmap(healerBig, getWidth() * 4 / 12, getHeight() / 16, null);
+                        canvas.drawBitmap(pieceBlank, getWidth() * 3 / 12, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(plus, getWidth() * 2 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(priceBlank, getWidth() * 10 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() /16, getHeight() / 35, null);
+                        if (connected == true && touchX > getWidth() /16 && touchX < getWidth()/16 + getWidth()/8 && touchY < getHeight() / 8 && touchY > 1) {
+                            touch4 = false;
+
+
+                        }
+
+                    }
+                    if (touch5 == true){
+                        canvas.drawBitmap(transparentBG, 0, 0, paint);
+
+                        canvas.drawBitmap(healerBig, getWidth() * 4 / 12, getHeight() / 16, null);
+                        canvas.drawBitmap(pieceBlank, getWidth() * 3 / 12, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(plus, getWidth() * 2 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(priceBlank, getWidth() * 10 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() /16, getHeight() / 35, null);
+                        if (connected == true && touchX > getWidth() /16 && touchX < getWidth()/16 + getWidth()/8 && touchY < getHeight() / 8 && touchY > 1) {
+                            touch5 = false;
+
+
+                        }
+
+                    }
+                    if (touch6 == true){
+                        canvas.drawBitmap(transparentBG, 0, 0, paint);
+
+                        canvas.drawBitmap(healerBig, getWidth() * 4 / 12, getHeight() / 16, null);
+                        canvas.drawBitmap(pieceBlank, getWidth() * 3 / 12, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(plus, getWidth() * 2 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(priceBlank, getWidth() * 10 / 16, getHeight() * 15 / 18, null);
+                        canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() /16, getHeight() / 35, null);
+                        if (connected == true && touchX > getWidth() /16 && touchX < getWidth()/16 + getWidth()/8 && touchY < getHeight() / 8 && touchY > 1) {
+                            touch6 = false;
+
+
+                        }
+
+                    }
+
+
+
+
                     if (extendCard == true) {
                         canvas.drawBitmap(transparentBG, 0, 0, paint);
 
@@ -661,9 +850,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
                     //wantedPosition.add(new Wanted(getWidth() / 16 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight()*5/16, getWidth() / 8, getHeight() / 4));
 
-                    if (healerScale == true) {
-                        canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() / 4, getHeight() / 8, null);
-                    }
+
 
 
                 }
