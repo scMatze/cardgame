@@ -21,8 +21,6 @@ import android.view.SurfaceView;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static at.htl_klu.cardgame.MainThread.canvas;
-
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public static final int WIDTH = 856;
     public static final int HEIGHT = 480;
@@ -228,10 +226,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         blitz = BitmapFactory.decodeResource(getResources(), R.drawable.lightningneu);
         spiegel = BitmapFactory.decodeResource(getResources(), R.drawable.mirrorneu);
         assasine = BitmapFactory.decodeResource(getResources(), R.drawable.assasineneu);
-        endturnbutton = BitmapFactory.decodeResource(getResources(),R.drawable.endturnbutton);
-        enemyturnpicture = BitmapFactory.decodeResource(getResources(), R.drawable.opponentsturnpicture);
-        endturnbutton = Bitmap.createScaledBitmap(endturnbutton, getWidth()/20, getHeight()/9, false);
-        enemyturnpicture = Bitmap.createScaledBitmap(enemyturnpicture, getWidth()/20, getHeight()/9, false);
         smallscaledAssasine = Bitmap.createScaledBitmap(assasine, handpositionsPlayer.get(0).getLength(),
                 handpositionsPlayer.get(0).getVast(), false);
         smallscaledSpiegel = Bitmap.createScaledBitmap(spiegel, handpositionsPlayer.get(0).getLength(),
@@ -292,11 +286,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread.setRunning(true);
         thread.start();
 
-
         ct = new CommunicationThread("10.66.11.18", 8888);
-
-        ct = new CommunicationThread("10.66.12.159", 8888, this);
-
 
 
     }
@@ -320,8 +310,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             connected = ct.isConnected();
             playerhasturn = true;
             enemyhasturn = false;
-            ct.setPlayerhasturn(playerhasturn);
-            ct.setEnemyhasturn(enemyhasturn);
         }
         if(connected == false && touchX < getWidth()/4*3 && touchX > getWidth()/4 && touchY < getHeight()/5*4 && touchY >  getHeight()/5*3){
 
@@ -334,8 +322,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             connected = ct.isConnected();
             playerhasturn = false;
             enemyhasturn = true;
-            ct.setPlayerhasturn(playerhasturn);
-            ct.setEnemyhasturn(enemyhasturn);
         }
 
 
@@ -353,34 +339,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
       //  if(connected = true && kaserne == false && playerhasturn == true)
 
-
             //if (healerScale == false &&touchX > 1 && touchX < getWidth() / 12 && touchY < getHeight() / 2 && touchY > getHeight() / 4) {
-
-            if (connected == true && healerScale == false &&touchX > 1 && touchX < getWidth() / 12 && touchY < getHeight() / 2 && touchY > getHeight() / 4
-                    ) {
-
                 //barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
                 //handpositionsPlayer.add(new Handpositions(getWidth() / 70 + getWidth() / 12 * i + getWidth() / 60 * i, getHeight() - 1 - (getHeight() / 5), getWidth() / 12, getHeight() / 5));
                 //healerScale = true;
 
 
        // }
-
-        if(connected == true && playerhasturn == true && touchX < getWidth() && touchX > getWidth()/20*19 && touchY < getHeight()/9*5
-                && touchY > getHeight()/9*4){
-
-
-           // ct.sendCommand("endturn");
-            ct.setCommand(1);
-            enemyhasturn = true;
-            playerhasturn = false;
-            ct.setEnemyhasturn(enemyhasturn);
-                ct.setPlayerhasturn(playerhasturn);
-
-
-
-
-        }
 
         //return super.onTouchEvent(event);
         return true;
@@ -400,16 +365,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
 
-  /*      if(enemyhasturn == true){
-            String temp = ct.getIncomigData();
-            if(temp.equals("endturn")){
-                playerhasturn = true;
-                enemyhasturn = false;
-                ct.setPlayerhasturn(playerhasturn);
-                ct.setEnemyhasturn(enemyhasturn);
-            }
-        }
-        */
 
         bg.draw(canvas);
 
@@ -479,15 +434,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(0).getLength(), heroPosition.get(0).getVast(),false),heroPosition.get(0).getPositionX(),heroPosition.get(0).getPositionY(), null);
                     //  canvas.drawBitmap(Bitmap.createScaledBitmap(playerHero, heroPosition.get(1).getLength(), heroPosition.get(1).getVast(),false),heroPosition.get(1).getPositionX(),heroPosition.get(1).getPositionY(), null);
                     canvas.drawBitmap(Bitmap.createScaledBitmap(barracks, getWidth() / 6, getHeight() / 2, false), getWidth() / 100, getHeight() / 4, null);
-
-
-                if(playerhasturn){
-                    canvas.drawBitmap(endturnbutton, getWidth()/20*19, getHeight()/9*4, null);
-                }
-                if(enemyhasturn){
-                    canvas.drawBitmap(enemyturnpicture, getWidth()/20*19, getHeight()/9*4, null);
-
-                }
                 }
 
                 if (kaserne == true) {
@@ -778,14 +724,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         editor.putInt(key, val);
         editor.commit();
-    }
-
-    public void setPlayerhasturn(boolean playerhasturn) {
-        this.playerhasturn = playerhasturn;
-    }
-
-    public void setEnemyhasturn(boolean enemyhasturn) {
-        this.enemyhasturn = enemyhasturn;
     }
 
     public int loadInt(String key) {
