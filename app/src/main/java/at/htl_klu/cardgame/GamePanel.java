@@ -574,6 +574,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     paint.setTextSize(30);
 
 
+
+          //  priceWantedPosition.add(new priceWanted(getWidth() / 16 + getWidth() / 12 * i + getWidth() / 22 * i, getHeight() * 9 / 16, getWidth() / 8, getHeight() / 4));
+            if (touchX > getWidth()/16 && touchX < getWidth()*3/16 && touchY < getHeight()/4 && touchY > getHeight()*13/16) {
+                Log.d("Koordinaten",""+touchX+touchY);
+
+            }
+
                     //new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight()/3, getWidth() / 12, getHeight() / 5
 
 
@@ -585,6 +592,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     canvas.drawText(String.valueOf(druids.getPrice()) + "Gold", (getWidth() / 11) + getWidth() * 4 / 8, (getHeight() * 20 / 32), paint);
                     canvas.drawText(String.valueOf(pioneers.getPrice()) + "Gold", (getWidth() / 11) + getWidth() * 5 / 8, (getHeight() * 20 / 32), paint);
                     canvas.drawText(String.valueOf(bannerCarriers.getPrice()) + "Gold", (getWidth() / 11) + getWidth() * 6 / 8, (getHeight() * 20 / 32), paint);
+
 
                     paint.setColor(Color.TRANSPARENT);
                     paint.setAlpha(200);

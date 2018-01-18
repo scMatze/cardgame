@@ -2,7 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
+<<<<<<< HEAD
+    buildToolsVersion '25.0.3'
+=======
     buildToolsVersion "25.0.3"
+>>>>>>> d9526cc6a067326ce2fd55bd0889afc0a0683625
     defaultConfig {
         applicationId "at.htl_klu.cardgame"
         minSdkVersion 21
