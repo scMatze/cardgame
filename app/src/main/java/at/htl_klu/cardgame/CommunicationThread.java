@@ -51,7 +51,7 @@ public class CommunicationThread extends Thread  {
              if (this.command !=0 ) {
                  Log.d("werner", "command not null true");
 
-                 if (this.command == 1) {
+               //  if (this.command == 1) {
 
                      Log.d("werner", "equals endturn true");
 
@@ -64,7 +64,7 @@ public class CommunicationThread extends Thread  {
                      this.command = 0;
                      test = false;
 
-                 }
+                // }
              }
             }
 
@@ -88,6 +88,18 @@ public class CommunicationThread extends Thread  {
                         incomigData = 0;
                         Log.d("werner", "set new turn");
                     }
+                    Log.d("werner","noch bevor dem 6 überprüfen");
+                    if(incomigData == 6) {
+
+                        Log.d("werner", "6 erkannt");
+                            gamepanel.setOpponenthandcounter(gamepanel.getOpponenthandcounter()-1);
+                            incomigData = 0;
+
+
+                    }
+                   // if(incomigData > 1){
+
+                    //}
                 }catch (IOException e){
                     e.printStackTrace();
                 }

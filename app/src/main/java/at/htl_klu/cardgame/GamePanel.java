@@ -66,6 +66,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap kasernenscaledheretic;
     private Bitmap endturnbutton;
     private Bitmap enemyturnpicture;
+    private Bitmap largescaledAssasine;
+    private Bitmap playbutton;
+    private Bitmap closebutton;
+    private Bitmap cardback;
     private boolean server;
     private boolean client;
     boolean part;
@@ -82,6 +86,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private int playermoneycounter = 5;
     private int enemymoneycounter = 5;
     private int deckremovecounter = 19;
+    private boolean drawLargeAssasine = false;
+    private boolean drawplaybutton = false;
+    private boolean drawclosebutton = false;
+    private int opponenthandcounter = 7;
 
 
 
@@ -230,8 +238,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         kasernenscaledhealer = Bitmap.createScaledBitmap(healer, barrackCardPosition.get(0).getLength(), barrackCardPosition.get(0).getVast(), false);
         kasenenscaledattacker = Bitmap.createScaledBitmap(attacker, barrackCardPosition.get(1).getLength(), barrackCardPosition.get(1).getVast(), false);
         kasernenscaledheretic = Bitmap.createScaledBitmap(heretic, barrackCardPosition.get(2).getLength(), barrackCardPosition.get(2).getVast(), false);
-
-
+        largescaledAssasine = Bitmap.createScaledBitmap(assasine, getWidth()/3, getHeight()/10*8, false);
+        playbutton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.playbutton),getWidth()/7*2, getHeight()/5, false);
+        closebutton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.closebutton),getWidth()/7*2, getHeight()/5, false);
+        cardback = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.cardback), handpositionsPlayer.get(0).getLength(),
+                handpositionsPlayer.get(0).getVast(), false);
 
         playerHero = BitmapFactory.decodeResource(getResources(), R.drawable.testherowall);
 
@@ -359,7 +370,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
         }
+        if(connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(0).getPositionX() &&
+                touchX < handpositionsPlayer.get(0).getPositionX()+handpositionsPlayer.get(0).getLength() &&
+                touchY > handpositionsPlayer.get(0).getPositionY() && handCardsName[0].isFilled() &&
+                touchY < handpositionsPlayer.get(0).getPositionY() + handpositionsPlayer.get(0).getVast()){
+                drawLargeAssasine = true;
+        }
+        if(connected == true && drawplaybutton &&  touchX > getWidth()/7*4+getWidth()/14 && touchY > getHeight()/5*1 &&
+             touchX < getWidth()/7*4 + getWidth()/14 + getWidth()/7*2 && touchY < getHeight()/5 + getHeight()/5 ){
+           // int temp = 100;
+            handCardsName[0].setFilled(false);
 
+
+            ct.setCommand(6);
+            drawLargeAssasine = false;
+            drawplaybutton = false;
+            drawclosebutton = false;
+        }
+        if(connected == true && drawclosebutton &&  touchX > getWidth()/7*4+getWidth()/14 && touchY > getHeight()/5*3 &&
+                touchX < getWidth()/7*4 + getWidth()/14 + getWidth()/7*2 && touchY < getHeight()/5*3 + getHeight()/5 ){
+
+            drawLargeAssasine = false;
+            drawclosebutton = false;
+            drawplaybutton = false;
+        }
         //return super.onTouchEvent(event);
         return true;
     }
@@ -451,6 +485,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
                 }
 
+                for(int i = 0; i < opponenthandcounter; i++){
+                    canvas.drawBitmap(cardback,
+                            handpositionsOpponent.get(i).getPositionX(), handpositionsOpponent.get(i).getPositionY(), null);
+                }
+
+
                     //  canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsPlayer.get(4).getLength(), handpositionsPlayer.get(4).getVast(), false), handpositionsPlayer.get(4).getPositionX(), handpositionsPlayer.get(4).getPositionY(), null);
                     //canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsOpponent.get(4).getLength(), handpositionsOpponent.get(4).getVast(), false), handpositionsOpponent.get(4).getPositionX(), handpositionsOpponent.get(4).getPositionY(), null);
                     //canvas.drawBitmap(Bitmap.createScaledBitmap(healer, handpositionsPlayer.get(6).getLength(), handpositionsPlayer.get(6).getVast(), false), handpositionsPlayer.get(6).getPositionX(), handpositionsPlayer.get(6).getPositionY(), null);
@@ -466,7 +506,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     canvas.drawBitmap(enemyturnpicture, getWidth()/20*19, getHeight()/9*4, null);
 
                 }
+
+                if(drawLargeAssasine){
+                    canvas.drawBitmap(largescaledAssasine, getWidth()/3, getHeight()/10*2, null);
+                    canvas.drawBitmap(playbutton, getWidth()/7*4+getWidth()/14, getHeight()/5*1,null);
+                    canvas.drawBitmap(closebutton, getWidth()/7*4+getWidth()/14, getHeight()/5*3,null);
+                    drawplaybutton = true;
+                    drawclosebutton = true;
+
                 }
+                }
+
 
                 if (kaserne == true) {
 
@@ -640,6 +690,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public int loadInt(String key) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         return sharedPreferences.getInt(key, 0);
+    }
+
+    public int getOpponenthandcounter() {
+        return opponenthandcounter;
+    }
+
+    public void setOpponenthandcounter(int opponenthandcounter) {
+        this.opponenthandcounter = opponenthandcounter;
     }
 
     public void setConnected(boolean connected) {
