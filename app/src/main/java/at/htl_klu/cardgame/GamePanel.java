@@ -341,7 +341,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         //ipMain
 
-        ct = new CommunicationThread("10.66.12.159", 8888,this);
+        ct = new CommunicationThread("10.66.11.18", 8888,this);
 
 
 
@@ -895,12 +895,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
-                        if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
-                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
+                        if (touchX > getWidth()*8/16 & touchX < getWidth()*8/16+getWidth()*2/16
+                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18+ getHeight()*2/16) {
+                            // minus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                           // minus = Bitmap.createScaledBitmap(minus,getWidth()*2/16,getHeight()*2/16,false);
+                            //  canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+
                             kasernenKartenIntArrayCounter0--;
                             kasernenKartenIntArray[0] = kasernenKartenIntArrayCounter0;
                             Log.d("rendl", "---");
-                            Log.d("Koordinaten", ""+touchX+ touchY);
+
+
                             plusPos6 = true;
                         }
 
@@ -941,11 +946,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
-                        if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
-                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter1--;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter1;
+                        if (touchX > getWidth()*8/16 & touchX < getWidth()*8/16+getWidth()*2/16
+                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18+ getHeight()*2/16) {
+                            // minus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                            // minus = Bitmap.createScaledBitmap(minus,getWidth()*2/16,getHeight()*2/16,false);
+                            //  canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+
+                            kasernenKartenIntArrayCounter0--;
+                            kasernenKartenIntArray[0] = kasernenKartenIntArrayCounter0;
                             Log.d("rendl", "---");
+
+
                             plusPos6 = true;
                         }
 
@@ -974,11 +985,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
-                        if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
-                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter2--;
-                            kasernenKartenIntArray[2] = kasernenKartenIntArrayCounter2;
+                        if (touchX > getWidth()*8/16 & touchX < getWidth()*8/16+getWidth()*2/16
+                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18+ getHeight()*2/16) {
+                            // minus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                            // minus = Bitmap.createScaledBitmap(minus,getWidth()*2/16,getHeight()*2/16,false);
+                            //  canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+
+                            kasernenKartenIntArrayCounter0--;
+                            kasernenKartenIntArray[0] = kasernenKartenIntArrayCounter0;
                             Log.d("rendl", "---");
+
+
                             plusPos6 = true;
                         }
 
@@ -1006,11 +1023,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
-                        if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
-                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter3--;
-                            kasernenKartenIntArray[3] = kasernenKartenIntArrayCounter3;
+                        if (touchX > getWidth()*8/16 & touchX < getWidth()*8/16+getWidth()*2/16
+                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18+ getHeight()*2/16) {
+                            // minus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                            // minus = Bitmap.createScaledBitmap(minus,getWidth()*2/16,getHeight()*2/16,false);
+                            //  canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+
+                            kasernenKartenIntArrayCounter0--;
+                            kasernenKartenIntArray[0] = kasernenKartenIntArrayCounter0;
                             Log.d("rendl", "---");
+
+
                             plusPos6 = true;
                         }
 
@@ -1038,11 +1061,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
-                        if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
-                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter4--;
-                            kasernenKartenIntArray[4] = kasernenKartenIntArrayCounter4;
+                        if (touchX > getWidth()*8/16 & touchX < getWidth()*8/16+getWidth()*2/16
+                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18+ getHeight()*2/16) {
+                            // minus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                            // minus = Bitmap.createScaledBitmap(minus,getWidth()*2/16,getHeight()*2/16,false);
+                            //  canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+
+                            kasernenKartenIntArrayCounter0--;
+                            kasernenKartenIntArray[0] = kasernenKartenIntArrayCounter0;
                             Log.d("rendl", "---");
+
+
                             plusPos6 = true;
                         }
 
@@ -1071,11 +1100,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
-                        if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
-                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter5--;
-                            kasernenKartenIntArray[5] = kasernenKartenIntArrayCounter5;
+                        if (touchX > getWidth()*8/16 & touchX < getWidth()*8/16+getWidth()*2/16
+                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18+ getHeight()*2/16) {
+                            // minus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                            // minus = Bitmap.createScaledBitmap(minus,getWidth()*2/16,getHeight()*2/16,false);
+                            //  canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+
+                            kasernenKartenIntArrayCounter0--;
+                            kasernenKartenIntArray[0] = kasernenKartenIntArrayCounter0;
                             Log.d("rendl", "---");
+
+
                             plusPos6 = true;
                         }
 
@@ -1102,11 +1137,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
-                        if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
-                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter6--;
-                            kasernenKartenIntArray[6] = kasernenKartenIntArrayCounter6;
+                        if (touchX > getWidth()*8/16 & touchX < getWidth()*8/16+getWidth()*2/16
+                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18+ getHeight()*2/16) {
+                            // minus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                            // minus = Bitmap.createScaledBitmap(minus,getWidth()*2/16,getHeight()*2/16,false);
+                            //  canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
+
+                            kasernenKartenIntArrayCounter0--;
+                            kasernenKartenIntArray[0] = kasernenKartenIntArrayCounter0;
                             Log.d("rendl", "---");
+
+
                             plusPos6 = true;
                         }
 
