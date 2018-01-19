@@ -51,7 +51,9 @@ public class CommunicationThread extends Thread  {
              if (this.command !=0 ) {
                  Log.d("werner", "command not null true");
 
-               //  if (this.command == 1) {
+                if (this.command == 1) {
+                    gamepanel.setOpponenthandcounter(gamepanel.getOpponenthandcounter()+1);
+                 }
 
                      Log.d("werner", "equals endturn true");
 
@@ -85,6 +87,17 @@ public class CommunicationThread extends Thread  {
                         gamepanel.setEnemyhasturn((false));
                         this. enemyhasturn = false;
                         this.playerhasturn = true;
+
+                        for(int i = 0; i < 7; i++) {
+                            if (gamepanel.getHandCardsName()[i].isFilled() == false) {
+                                gamepanel.getHandCardsName()[i] = new HandCard(gamepanel.getDeckCards().get(gamepanel.getDeckremovecounter()), true);
+                                gamepanel.getDeckCards().remove(gamepanel.getDeckremovecounter());
+
+                                gamepanel.setDeckremovecounter(gamepanel.getDeckremovecounter() - 1);
+                             //   gamepanel.setOpponenthandcounter(gamepanel.getOpponenthandcounter()+1);
+                                break;
+                            }
+                        }
                         incomigData = 0;
                         Log.d("werner", "set new turn");
                     }

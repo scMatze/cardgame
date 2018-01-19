@@ -28,4 +28,5 @@ public class HandCard {
     public void setFilled(boolean filled) {
         this.filledwithcard = filled;
     }
+
 }

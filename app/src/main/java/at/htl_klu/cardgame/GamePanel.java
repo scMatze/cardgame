@@ -37,6 +37,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static boolean start = true;
     public static boolean healerScale = false;
+    private boolean plusPos6 = false;
 
     private Bitmap rndl;
     private Bitmap healer;
@@ -69,6 +70,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap endturnbutton;
     private Bitmap enemyturnpicture;
     private Bitmap largescaledAssasine;
+    private Bitmap largescaledBlitz;
+    private Bitmap largescaledSpiegel;
     private Bitmap playbutton;
     private Bitmap closebutton;
     private Bitmap cardback;
@@ -88,12 +91,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private int playermoneycounter = 5;
     private int enemymoneycounter = 5;
     private int deckremovecounter = 19;
-<<<<<<< HEAD
+    private int[] kasernenKartenIntArray = new int[7];
+    private int kasernenKartenIntArrayCounter = 0;
+
     private boolean drawLargeAssasine = false;
     private boolean drawplaybutton = false;
     private boolean drawclosebutton = false;
     private int opponenthandcounter = 7;
-=======
+    private int playermoney = 300;
+    private int playerlife = 1000;
+    private int opponentlife = 1000;
+    private int position = -1;
+
     private boolean touch = false;
     private boolean touch1 = false;
     private boolean touch2 = false;
@@ -102,7 +111,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private boolean touch5 = false;
     private boolean touch6 = false;
 
->>>>>>> 18f38e2e198ced5696353d7cb7182a6fbaac822e
+
 
 
 
@@ -255,6 +264,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         kasenenscaledattacker = Bitmap.createScaledBitmap(attacker, barrackCardPosition.get(1).getLength(), barrackCardPosition.get(1).getVast(), false);
         kasernenscaledheretic = Bitmap.createScaledBitmap(heretic, barrackCardPosition.get(2).getLength(), barrackCardPosition.get(2).getVast(), false);
         largescaledAssasine = Bitmap.createScaledBitmap(assasine, getWidth()/3, getHeight()/10*8, false);
+        largescaledBlitz = Bitmap.createScaledBitmap(blitz, getWidth()/3, getHeight()/10*8, false);
+        largescaledSpiegel = Bitmap.createScaledBitmap(spiegel, getWidth()/3, getHeight()/10*8, false);
+
         playbutton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.playbutton),getWidth()/7*2, getHeight()/5, false);
         closebutton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.closebutton),getWidth()/7*2, getHeight()/5, false);
         cardback = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.cardback), handpositionsPlayer.get(0).getLength(),
@@ -307,7 +319,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread.start();
 
 
-        ct = new CommunicationThread("10.66.11.18", 8888,this);
+        ct = new CommunicationThread("10.66.12.159", 8888,this);
 
 
 
@@ -322,11 +334,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         touchX = event.getX();
         touchY = event.getY();
 
-        if(connected == false && touchX < getWidth()/4*3 && touchX > getWidth()/4 && touchY < getHeight()/5*2 && touchY >  getHeight()/5){
+        if (connected == false && touchX < getWidth() / 4 * 3 && touchX > getWidth() / 4 && touchY < getHeight() / 5 * 2 && touchY > getHeight() / 5) {
 
             part = false;
             ct.setPart(part);
-            if(threadstarted == false) {
+            if (threadstarted == false) {
                 ct.start();
                 threadstarted = true;
             }
@@ -337,11 +349,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             ct.setPlayerhasturn(playerhasturn);
             ct.setEnemyhasturn(enemyhasturn);
         }
-        if(connected == false && touchX < getWidth()/4*3 && touchX > getWidth()/4 && touchY < getHeight()/5*4 && touchY >  getHeight()/5*3){
+        if (connected == false && touchX < getWidth() / 4 * 3 && touchX > getWidth() / 4 && touchY < getHeight() / 5 * 4 && touchY > getHeight() / 5 * 3) {
 
             part = true;
             ct.setPart(part);
-            if(threadstarted == false) {
+            if (threadstarted == false) {
                 ct.start();
                 threadstarted = true;
             }
@@ -364,66 +376,150 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         }
 
-
-      //  if(connected = true && kaserne == false && playerhasturn == true)
-
-
-            //if (healerScale == false &&touchX > 1 && touchX < getWidth() / 12 && touchY < getHeight() / 2 && touchY > getHeight() / 4) {
-
-            if (connected == true && healerScale == false &&touchX > 1 && touchX < getWidth() / 12 && touchY < getHeight() / 2 && touchY > getHeight() / 4) {
-
-                //barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
-                //handpositionsPlayer.add(new Handpositions(getWidth() / 70 + getWidth() / 12 * i + getWidth() / 60 * i, getHeight() - 1 - (getHeight() / 5), getWidth() / 12, getHeight() / 5));
-                //healerScale = true;
-
-
-                // }
-
-                if (connected == true && playerhasturn == true && touchX < getWidth() && touchX > getWidth() / 20 * 19 && touchY < getHeight() / 9 * 5
-                        && touchY > getHeight() / 9 * 4) {
-
-
-                    // ct.sendCommand("endturn");
-                    ct.setCommand(1);
-                    enemyhasturn = true;
-                    playerhasturn = false;
-                    ct.setEnemyhasturn(enemyhasturn);
-                    ct.setPlayerhasturn(playerhasturn);
-
-<<<<<<< HEAD
-        }
-        if(connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(0).getPositionX() &&
-                touchX < handpositionsPlayer.get(0).getPositionX()+handpositionsPlayer.get(0).getLength() &&
-                touchY > handpositionsPlayer.get(0).getPositionY() && handCardsName[0].isFilled() &&
-                touchY < handpositionsPlayer.get(0).getPositionY() + handpositionsPlayer.get(0).getVast()){
-                drawLargeAssasine = true;
-        }
-        if(connected == true && drawplaybutton &&  touchX > getWidth()/7*4+getWidth()/14 && touchY > getHeight()/5*1 &&
-             touchX < getWidth()/7*4 + getWidth()/14 + getWidth()/7*2 && touchY < getHeight()/5 + getHeight()/5 ){
-           // int temp = 100;
-            handCardsName[0].setFilled(false);
-
-
-            ct.setCommand(6);
-            drawLargeAssasine = false;
-            drawplaybutton = false;
-            drawclosebutton = false;
-        }
-        if(connected == true && drawclosebutton &&  touchX > getWidth()/7*4+getWidth()/14 && touchY > getHeight()/5*3 &&
-                touchX < getWidth()/7*4 + getWidth()/14 + getWidth()/7*2 && touchY < getHeight()/5*3 + getHeight()/5 ){
-
-            drawLargeAssasine = false;
-            drawclosebutton = false;
-            drawplaybutton = false;
-        }
-=======
-
+        /*for (int i = 0; i < 6; i++) {
+            if (kaserne & touchX > barrackCardPosition.get(i).getPositionX() & touchX < barrackCardPosition.get(i).getPositionX() + 50
+                    & touchY > barrackCardPosition.get(i).getPositionY() & touchY < barrackCardPosition.get(i).getPositionY() + 50) {
+                //kasernenKartenBooleanArray[i] = true;
+                //plusMinus = true;
+                //if (touchX > getWidth() * 2 / 16 & touchX < getWidth() * 2 / 16 + 40
+                  //      & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
+                if (touchX > 0 && touchX < getWidth() && touchY > 0 && touchY < getHeight()) {
+                    kasernenKartenIntArrayCounter++;
+                    kasernenKartenIntArray[i] = kasernenKartenIntArrayCounter;
+                    Log.d("rendl", "+++");
+                }
+                if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
+                        & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
+                    kasernenKartenIntArrayCounter--;
+                    kasernenKartenIntArray[i] = kasernenKartenIntArrayCounter;
+                    Log.d("rendl", "---");
                 }
             }
->>>>>>> 18f38e2e198ced5696353d7cb7182a6fbaac822e
+        }*/
+
+
+        //  if(connected = true && kaserne == false && playerhasturn == true)
+
+
+        //if (healerScale == false &&touchX > 1 && touchX < getWidth() / 12 && touchY < getHeight() / 2 && touchY > getHeight() / 4) {
+
+        if (connected == true && healerScale == false && touchX > 1 && touchX < getWidth() / 12 && touchY < getHeight() / 2 && touchY > getHeight() / 4) {
+
+            //barrackCardPosition.add(new Barracks(getWidth() / 12 + getWidth() / 12 * i + getWidth() / 24 * i, getHeight() / 3, getWidth() / 12, getHeight() / 5));
+            //handpositionsPlayer.add(new Handpositions(getWidth() / 70 + getWidth() / 12 * i + getWidth() / 60 * i, getHeight() - 1 - (getHeight() / 5), getWidth() / 12, getHeight() / 5));
+            //healerScale = true;
+
+
+            // }
+        }
+            if (connected == true && playerhasturn == true && touchX < getWidth() && touchX > getWidth() / 20 * 19 && touchY < getHeight() / 9 * 5
+                    && touchY > getHeight() / 9 * 4) {
+
+
+                // ct.sendCommand("endturn");
+                ct.setCommand(1);
+                enemyhasturn = true;
+                playerhasturn = false;
+                ct.setEnemyhasturn(enemyhasturn);
+                ct.setPlayerhasturn(playerhasturn);
+
+
+            }
+            if (connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(0).getPositionX() &&
+                    touchX < handpositionsPlayer.get(0).getPositionX() + handpositionsPlayer.get(0).getLength() &&
+                    touchY > handpositionsPlayer.get(0).getPositionY() && handCardsName[0].isFilled() &&
+                    touchY < handpositionsPlayer.get(0).getPositionY() + handpositionsPlayer.get(0).getVast()) {
+                drawLargeAssasine = true;
+                position = 0;
+            }
+        if (connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(1).getPositionX() &&
+                touchX < handpositionsPlayer.get(1).getPositionX() + handpositionsPlayer.get(1).getLength() &&
+                touchY > handpositionsPlayer.get(1).getPositionY() && handCardsName[1].isFilled() &&
+                touchY < handpositionsPlayer.get(1).getPositionY() + handpositionsPlayer.get(1).getVast()) {
+            drawLargeAssasine = true;
+            position = 1;
+                }
+
+        if (connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(2).getPositionX() &&
+                touchX < handpositionsPlayer.get(2).getPositionX() + handpositionsPlayer.get(2).getLength() &&
+                touchY > handpositionsPlayer.get(2).getPositionY() && handCardsName[2].isFilled() &&
+                touchY < handpositionsPlayer.get(2).getPositionY() + handpositionsPlayer.get(2).getVast()) {
+            drawLargeAssasine = true;
+            position = 2;
+        }
+        if (connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(3).getPositionX() &&
+                touchX < handpositionsPlayer.get(3).getPositionX() + handpositionsPlayer.get(3).getLength() &&
+                touchY > handpositionsPlayer.get(3).getPositionY() && handCardsName[3].isFilled() &&
+                touchY < handpositionsPlayer.get(3).getPositionY() + handpositionsPlayer.get(3).getVast()) {
+            drawLargeAssasine = true;
+            position = 3;
+        }
+        if (connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(4).getPositionX() &&
+                touchX < handpositionsPlayer.get(4).getPositionX() + handpositionsPlayer.get(4).getLength() &&
+                touchY > handpositionsPlayer.get(4).getPositionY() && handCardsName[4].isFilled() &&
+                touchY < handpositionsPlayer.get(4).getPositionY() + handpositionsPlayer.get(4).getVast()) {
+            drawLargeAssasine = true;
+            position = 4;
+
+
+        }
+        if (connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(5).getPositionX() &&
+                touchX < handpositionsPlayer.get(5).getPositionX() + handpositionsPlayer.get(5).getLength() &&
+                touchY > handpositionsPlayer.get(5).getPositionY() && handCardsName[5].isFilled() &&
+                touchY < handpositionsPlayer.get(5).getPositionY() + handpositionsPlayer.get(5).getVast()) {
+            drawLargeAssasine = true;
+            position = 5;
+        }
+        if (connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(6).getPositionX() &&
+                touchX < handpositionsPlayer.get(6).getPositionX() + handpositionsPlayer.get(6).getLength() &&
+                touchY > handpositionsPlayer.get(6).getPositionY() && handCardsName[6].isFilled() &&
+                touchY < handpositionsPlayer.get(6).getPositionY() + handpositionsPlayer.get(6).getVast()) {
+            drawLargeAssasine = true;
+            position = 6;
+        }
+
+            if (connected == true && drawplaybutton && touchX > getWidth() / 7 * 4 + getWidth() / 14 && touchY > getHeight() / 5 * 1 &&
+                    touchX < getWidth() / 7 * 4 + getWidth() / 14 + getWidth() / 7 * 2 && touchY < getHeight() / 5 + getHeight() / 5) {
+                // int temp = 100;
+                handCardsName[position].setFilled(false);
+
+
+                ct.setCommand(6);
+                drawLargeAssasine = false;
+                drawplaybutton = false;
+                drawclosebutton = false;
+            }
+            if (connected == true && drawclosebutton && touchX > getWidth() / 7 * 4 + getWidth() / 14 && touchY > getHeight() / 5 * 3 &&
+                    touchX < getWidth() / 7 * 4 + getWidth() / 14 + getWidth() / 7 * 2 && touchY < getHeight() / 5 * 3 + getHeight() / 5) {
+
+                drawLargeAssasine = false;
+                drawclosebutton = false;
+                drawplaybutton = false;
+                position = -1;
+            }
+
+      /*  if (touchX > getWidth() * 2 / 16 && touchY > getHeight() * 15 / 18 && touchX < getWidth() * 2 / 16 + getWidth()*2/16 &&
+                touchY < getHeight() * 15 / 18 + getHeight()*2/16 && touch6) {
+            kasernenKartenIntArrayCounter++;
+            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+            Log.d("rendl", kasernenKartenIntArray[1] + "");
+            //Log.d("rendl")
+            plusPos6 = true;
+        }
+        if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
+                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
+            kasernenKartenIntArrayCounter--;
+            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+            Log.d("rendl", "---");
+        }
+        */
+
+
+
         //return super.onTouchEvent(event);
         return true;
     }
+
 
     public void update() {
         bg.update();
@@ -535,7 +631,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 }
 
                 if(drawLargeAssasine){
-                    canvas.drawBitmap(largescaledAssasine, getWidth()/3, getHeight()/10*2, null);
+                    if(handCardsName[position].getName().equals("Assasine")) {
+                        canvas.drawBitmap(largescaledAssasine, getWidth() / 3, getHeight() / 10 * 2, null);
+                    }
+                    if(handCardsName[position].getName().equals("Spiegel")) {
+                        canvas.drawBitmap(largescaledSpiegel, getWidth() / 3, getHeight() / 10 * 2, null);
+                    }
+                    if(handCardsName[position].getName().equals("Blitz")) {
+                        canvas.drawBitmap(largescaledBlitz, getWidth() / 3, getHeight() / 10 * 2, null);
+                    }
                     canvas.drawBitmap(playbutton, getWidth()/7*4+getWidth()/14, getHeight()/5*1,null);
                     canvas.drawBitmap(closebutton, getWidth()/7*4+getWidth()/14, getHeight()/5*3,null);
                     drawplaybutton = true;
@@ -734,7 +838,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
                         }
-
+                        /*if (touchX > getWidth() * 2 / 16 && touchY > getHeight() * 15 / 18 && touchX < getWidth() * 2 / 16 + getWidth()*2/16 &&
+                                touchY < getHeight() * 15 / 18 + getHeight()*2/16) {
+                            kasernenKartenIntArrayCounter++;
+                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            Log.d("rendl", "+++");
+                        }
+                        if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
+                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
+                            kasernenKartenIntArrayCounter--;
+                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            Log.d("rendl", "---");
+                        }*/
                     }
                     if (touch1 == true){
                         canvas.drawBitmap(transparentBG, 0, 0, paint);
@@ -751,6 +866,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
                         }
+
 
                     }
                     if (touch2 == true){
@@ -828,8 +944,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() /16, getHeight() / 35, null);
                         if (connected == true && touchX > getWidth() /16 && touchX < getWidth()/16 + getWidth()/8 && touchY < getHeight() / 8 && touchY > 1) {
                             touch6 = false;
+                            plusPos6 = false;
 
-
+                        }
+                        if (touchX > getWidth() * 2 / 16 && touchY > getHeight() * 15 / 18 && touchX < getWidth() * 2 / 16 + getWidth()*2/16 &&
+                                touchY < getHeight() * 15 / 18 + getHeight()*2/16 && plusPos6 == false){
+                            kasernenKartenIntArrayCounter++;
+                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            Log.d("rendl", kasernenKartenIntArray[1] + "");
+                            //Log.d("rendl")
+                            plusPos6 = true;
+                        }
+                        if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
+                                & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
+                            kasernenKartenIntArrayCounter--;
+                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            Log.d("rendl", "---");
                         }
 
                     }
@@ -885,6 +1015,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public void setOpponenthandcounter(int opponenthandcounter) {
         this.opponenthandcounter = opponenthandcounter;
+    }
+
+    public HandCard[] getHandCardsName() {
+        return handCardsName;
+    }
+
+    public void setHandCardsName(HandCard[] handCardsName) {
+        this.handCardsName = handCardsName;
+    }
+
+    public ArrayList<String> getDeckCards() {
+        return deckCards;
+    }
+
+    public void setDeckCards(ArrayList<String> deckCards) {
+        this.deckCards = deckCards;
+    }
+
+    public int getDeckremovecounter() {
+        return deckremovecounter;
+    }
+
+    public void setDeckremovecounter(int deckremovecounter) {
+        this.deckremovecounter = deckremovecounter;
     }
 
     public void setConnected(boolean connected) {
