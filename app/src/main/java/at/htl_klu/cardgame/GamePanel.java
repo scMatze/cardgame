@@ -41,6 +41,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap rndl;
     private Bitmap healer;
     private Bitmap healerBig;
+    private Bitmap attackerBig;
+    private Bitmap hereticBig;
     private Bitmap heretic;
     private Bitmap attacker;
     private Bitmap playerHero;
@@ -88,12 +90,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private int playermoneycounter = 5;
     private int enemymoneycounter = 5;
     private int deckremovecounter = 19;
-<<<<<<< HEAD
+
     private boolean drawLargeAssasine = false;
     private boolean drawplaybutton = false;
     private boolean drawclosebutton = false;
     private int opponenthandcounter = 7;
-=======
+
     private boolean touch = false;
     private boolean touch1 = false;
     private boolean touch2 = false;
@@ -102,7 +104,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private boolean touch5 = false;
     private boolean touch6 = false;
 
->>>>>>> 18f38e2e198ced5696353d7cb7182a6fbaac822e
+
 
 
 
@@ -228,6 +230,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         transparentBG = BitmapFactory.decodeResource(getResources(), R.drawable.transparent);
         healerBig = BitmapFactory.decodeResource(getResources(), R.drawable.healer);
         healerBig = Bitmap.createScaledBitmap(healer,getWidth() / 3, getHeight()*3/4,false);
+        attackerBig = BitmapFactory.decodeResource(getResources(), R.drawable.attacker);
+        attackerBig = Bitmap.createScaledBitmap(attacker,getWidth() / 3, getHeight()*3/4,false);
+        hereticBig = BitmapFactory.decodeResource(getResources(), R.drawable.heretiker);
+        hereticBig = Bitmap.createScaledBitmap(heretic,getWidth() / 3, getHeight()*3/4,false);
         pieceBlank = BitmapFactory.decodeResource(getResources(), R.drawable.pieceblank);
         pieceBlank = Bitmap.createScaledBitmap(pieceBlank,getWidth()*4/16, getHeight()*2/16,false);
         plus = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
@@ -235,7 +241,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         minus = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
         minus = Bitmap.createScaledBitmap(minus,getWidth()*2/16,getHeight()*2/16,false);
         priceBlank = BitmapFactory.decodeResource(getResources(), R.drawable.priceblank);
-        priceBlank = Bitmap.createScaledBitmap(priceBlank,getWidth()*4/16, getHeight()*2/16,false);
+                                                      priceBlank = Bitmap.createScaledBitmap(priceBlank,getWidth()*4/16, getHeight()*2/16,false);
         blitz = BitmapFactory.decodeResource(getResources(), R.drawable.lightningneu);
         spiegel = BitmapFactory.decodeResource(getResources(), R.drawable.mirrorneu);
         assasine = BitmapFactory.decodeResource(getResources(), R.drawable.assasineneu);
@@ -308,6 +314,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
         ct = new CommunicationThread("10.66.11.18", 8888,this);
+        //ipMain
 
 
 
@@ -377,6 +384,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 //healerScale = true;
 
 
+            }
                 // }
 
                 if (connected == true && playerhasturn == true && touchX < getWidth() && touchX > getWidth() / 20 * 19 && touchY < getHeight() / 9 * 5
@@ -390,7 +398,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     ct.setEnemyhasturn(enemyhasturn);
                     ct.setPlayerhasturn(playerhasturn);
 
-<<<<<<< HEAD
+
         }
         if(connected == true && playerhasturn == true && touchX > handpositionsPlayer.get(0).getPositionX() &&
                 touchX < handpositionsPlayer.get(0).getPositionX()+handpositionsPlayer.get(0).getLength() &&
@@ -416,11 +424,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             drawclosebutton = false;
             drawplaybutton = false;
         }
-=======
 
-                }
-            }
->>>>>>> 18f38e2e198ced5696353d7cb7182a6fbaac822e
+
+
+
+
         //return super.onTouchEvent(event);
         return true;
     }
@@ -729,6 +737,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         canvas.drawBitmap(priceBlank, getWidth() * 10 / 16, getHeight() * 15 / 18, null);
                         canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() /16, getHeight() / 35, null);
 
+
                         if (connected == true && touchX > getWidth() /16 && touchX < getWidth()/16 + getWidth()/8 && touchY < getHeight() / 8 && touchY > 1) {
                             touch = false;
 
@@ -739,12 +748,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     if (touch1 == true){
                         canvas.drawBitmap(transparentBG, 0, 0, paint);
 
-                        canvas.drawBitmap(healerBig, getWidth() * 4 / 12, getHeight() / 16, null);
+                        canvas.drawBitmap(attackerBig, getWidth() * 4 / 12, getHeight() / 16, null);
                         canvas.drawBitmap(pieceBlank, getWidth() * 3 / 12, getHeight() * 15 / 18, null);
                         canvas.drawBitmap(plus, getWidth() * 2 / 16, getHeight() * 15 / 18, null);
                         canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
                         canvas.drawBitmap(priceBlank, getWidth() * 10 / 16, getHeight() * 15 / 18, null);
-                        canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() * 7 / 8, getHeight() / 35, null);
+                        //canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() * 7 / 8, getHeight() / 35, null);
                         canvas.drawBitmap(Bitmap.createScaledBitmap(exitBarracks, getWidth() / 8, getHeight() / 6, false), getWidth() /16, getHeight() / 35, null);
                         if (connected == true && touchX > getWidth() /16 && touchX < getWidth()/16 + getWidth()/8 && touchY < getHeight() / 8 && touchY > 1) {
                             touch1 = false;
@@ -756,7 +765,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     if (touch2 == true){
                         canvas.drawBitmap(transparentBG, 0, 0, paint);
 
-                        canvas.drawBitmap(healerBig, getWidth() * 4 / 12, getHeight() / 16, null);
+                        canvas.drawBitmap(hereticBig, getWidth() * 4 / 12, getHeight() / 16, null);
                         canvas.drawBitmap(pieceBlank, getWidth() * 3 / 12, getHeight() * 15 / 18, null);
                         canvas.drawBitmap(plus, getWidth() * 2 / 16, getHeight() * 15 / 18, null);
                         canvas.drawBitmap(minus, getWidth() * 8 / 16, getHeight() * 15 / 18, null);
