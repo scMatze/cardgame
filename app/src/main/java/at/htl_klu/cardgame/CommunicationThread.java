@@ -52,6 +52,7 @@ public class CommunicationThread extends Thread  {
                  Log.d("werner", "command not null true");
 
                 if (this.command == 1) {
+                    if(gamepanel.getOpponenthandcounter() < 7)
                     gamepanel.setOpponenthandcounter(gamepanel.getOpponenthandcounter()+1);
                  }
 
