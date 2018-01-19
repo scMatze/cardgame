@@ -95,7 +95,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private int deckremovecounter = 19;
 
     private int[] kasernenKartenIntArray = new int[7];
-    private int kasernenKartenIntArrayCounter = 0;
+    private int kasernenKartenIntArrayCounter0 = 0;
+    private int kasernenKartenIntArrayCounter1 = 0;
+    private int kasernenKartenIntArrayCounter2 = 0;
+    private int kasernenKartenIntArrayCounter3 = 0;
+    private int kasernenKartenIntArrayCounter4 = 0;
+    private int kasernenKartenIntArrayCounter5 = 0;
+    private int kasernenKartenIntArrayCounter6 = 0;
+
+
 
 
     private boolean drawLargeAssasine = false;
@@ -333,7 +341,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         //ipMain
 
-        ct = new CommunicationThread("10.66.11.18", 8888,this);
+        ct = new CommunicationThread("10.66.12.159", 8888,this);
 
 
 
@@ -675,6 +683,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     drawclosebutton = true;
 
                 }
+
+                for(int i = 0; i < 7; i++){
+                    if(kasernenKartenIntArray[i] > 0){
+                        if(i == 0 || i > 2){
+                            canvas.drawBitmap(kasernenscaledhealer,getWidth() / 5 + getWidth() / 12 * i + getWidth() / 60 * i,
+                                    getHeight()/4*2, null);
+                        }
+                    }
+                }
+
                 }
 
 
@@ -871,17 +889,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         }
                         if (touchX > getWidth() * 2 / 16 && touchY > getHeight() * 15 / 18 && touchX < getWidth() * 2 / 16 + getWidth()*2/16 &&
                                 touchY < getHeight() * 15 / 18 + getHeight()*2/16 && plusPos6 == false){
-                            kasernenKartenIntArrayCounter++;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
-                            Log.d("rendl", kasernenKartenIntArray[1] + "");
+                            kasernenKartenIntArrayCounter0 ++;
+                            kasernenKartenIntArray[0] = kasernenKartenIntArrayCounter0;
+                            Log.d("rendl", kasernenKartenIntArray[0] + "");
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
                         if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
                                 & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter--;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            kasernenKartenIntArrayCounter0--;
+                            kasernenKartenIntArray[0] = kasernenKartenIntArrayCounter0;
                             Log.d("rendl", "---");
+                            Log.d("Koordinaten", ""+touchX+ touchY);
                             plusPos6 = true;
                         }
 
@@ -916,16 +935,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         }
                         if (touchX > getWidth() * 2 / 16 && touchY > getHeight() * 15 / 18 && touchX < getWidth() * 2 / 16 + getWidth()*2/16 &&
                                 touchY < getHeight() * 15 / 18 + getHeight()*2/16 && plusPos6 == false){
-                            kasernenKartenIntArrayCounter++;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            kasernenKartenIntArrayCounter1++;
+                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter1;
                             Log.d("rendl", kasernenKartenIntArray[1] + "");
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
                         if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
                                 & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter--;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            kasernenKartenIntArrayCounter1--;
+                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter1;
                             Log.d("rendl", "---");
                             plusPos6 = true;
                         }
@@ -949,16 +968,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         }
                         if (touchX > getWidth() * 2 / 16 && touchY > getHeight() * 15 / 18 && touchX < getWidth() * 2 / 16 + getWidth()*2/16 &&
                                 touchY < getHeight() * 15 / 18 + getHeight()*2/16 && plusPos6 == false){
-                            kasernenKartenIntArrayCounter++;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
-                            Log.d("rendl", kasernenKartenIntArray[1] + "");
+                            kasernenKartenIntArrayCounter2++;
+                            kasernenKartenIntArray[2] = kasernenKartenIntArrayCounter2;
+                            Log.d("rendl", kasernenKartenIntArray[2] + "");
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
                         if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
                                 & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter--;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            kasernenKartenIntArrayCounter2--;
+                            kasernenKartenIntArray[2] = kasernenKartenIntArrayCounter2;
                             Log.d("rendl", "---");
                             plusPos6 = true;
                         }
@@ -981,16 +1000,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         }
                         if (touchX > getWidth() * 2 / 16 && touchY > getHeight() * 15 / 18 && touchX < getWidth() * 2 / 16 + getWidth()*2/16 &&
                                 touchY < getHeight() * 15 / 18 + getHeight()*2/16 && plusPos6 == false){
-                            kasernenKartenIntArrayCounter++;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
-                            Log.d("rendl", kasernenKartenIntArray[1] + "");
+                            kasernenKartenIntArrayCounter3++;
+                            kasernenKartenIntArray[3] = kasernenKartenIntArrayCounter3;
+                            Log.d("rendl", kasernenKartenIntArray[3] + "");
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
                         if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
                                 & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter--;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            kasernenKartenIntArrayCounter3--;
+                            kasernenKartenIntArray[3] = kasernenKartenIntArrayCounter3;
                             Log.d("rendl", "---");
                             plusPos6 = true;
                         }
@@ -1013,16 +1032,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         }
                         if (touchX > getWidth() * 2 / 16 && touchY > getHeight() * 15 / 18 && touchX < getWidth() * 2 / 16 + getWidth()*2/16 &&
                                 touchY < getHeight() * 15 / 18 + getHeight()*2/16 && plusPos6 == false){
-                            kasernenKartenIntArrayCounter++;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
-                            Log.d("rendl", kasernenKartenIntArray[1] + "");
+                            kasernenKartenIntArrayCounter4++;
+                            kasernenKartenIntArray[4] = kasernenKartenIntArrayCounter4;
+                            Log.d("rendl", kasernenKartenIntArray[4] + "");
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
                         if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
                                 & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter--;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            kasernenKartenIntArrayCounter4--;
+                            kasernenKartenIntArray[4] = kasernenKartenIntArrayCounter4;
                             Log.d("rendl", "---");
                             plusPos6 = true;
                         }
@@ -1046,16 +1065,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
                         if (touchX > getWidth() * 2 / 16 && touchY > getHeight() * 15 / 18 && touchX < getWidth() * 2 / 16 + getWidth()*2/16 &&
                                 touchY < getHeight() * 15 / 18 + getHeight()*2/16 && plusPos6 == false){
-                            kasernenKartenIntArrayCounter++;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
-                            Log.d("rendl", kasernenKartenIntArray[1] + "");
+                            kasernenKartenIntArrayCounter5++;
+                            kasernenKartenIntArray[5] = kasernenKartenIntArrayCounter5;
+                            Log.d("rendl", kasernenKartenIntArray[5] + "");
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
                         if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
                                 & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter--;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            kasernenKartenIntArrayCounter5--;
+                            kasernenKartenIntArray[5] = kasernenKartenIntArrayCounter5;
                             Log.d("rendl", "---");
                             plusPos6 = true;
                         }
@@ -1077,16 +1096,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         }
                         if (touchX > getWidth() * 2 / 16 && touchY > getHeight() * 15 / 18 && touchX < getWidth() * 2 / 16 + getWidth()*2/16 &&
                                 touchY < getHeight() * 15 / 18 + getHeight()*2/16 && plusPos6 == false){
-                            kasernenKartenIntArrayCounter++;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
-                            Log.d("rendl", kasernenKartenIntArray[1] + "");
+                            kasernenKartenIntArrayCounter6++;
+                            kasernenKartenIntArray[6] = kasernenKartenIntArrayCounter6;
+                            Log.d("rendl", kasernenKartenIntArray[6] + "");
                             //Log.d("rendl")
                             plusPos6 = true;
                         }
                         if (touchX > getWidth() * 8 / 16 & touchX < getWidth() * 8 / 16 + 40
                                 & touchY > getHeight() * 15 / 18 & touchY < getHeight() * 15 / 18 + 40) {
-                            kasernenKartenIntArrayCounter--;
-                            kasernenKartenIntArray[1] = kasernenKartenIntArrayCounter;
+                            kasernenKartenIntArrayCounter6--;
+                            kasernenKartenIntArray[6] = kasernenKartenIntArrayCounter6;
                             Log.d("rendl", "---");
                             plusPos6 = true;
                         }
